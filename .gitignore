@@ -29,6 +29,7 @@
 /bin/
 /lib/
 /dist/
+/test/
 
 # CMake generated files
 CMakeCache.txt
