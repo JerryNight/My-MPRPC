@@ -9,6 +9,16 @@ message SumResponse {
     int32 sum = 1;
 }
 
+message DevideRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+
+message DevideResponse {
+    int32 devide = 1;
+}
+
 service CalculatorService {
     rpc Sum (SumRequest) returns (SumResponse);
+    rpc Devide (DevideRequest) returns (DevideResponse);
 }
