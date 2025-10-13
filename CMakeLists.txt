@@ -11,8 +11,10 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 # 项目编译头文件搜索路径
-include_directories(${PROJECT_SOURCE_DIR}/src/include)
+include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/example)
+include_directories(${CMAKE_SOURCE_DIR}/proto)  # 添加protobuf生成文件目录
+
 # 项目库文件搜索路径
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 

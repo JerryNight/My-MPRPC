@@ -23,10 +23,10 @@ public:
                google::protobuf::Message& response);
 
     // 用户调用sum，然后该函数调用RPC服务
-    int sum(int a,int b);
+    // int sum(int a,int b);
     
     // 序列化:结果保存在pack_message
-    void packMethod(const std::string& service_name, const std::string& method_name);
+    // void packMethod(const std::string& service_name, const std::string& method_name);
     
     // 把序列化后的数据，发给服务端
     void sendAll();
@@ -36,10 +36,12 @@ public:
 
 
 private:
+    // 连接服务端（注册中心）
     void connectToServer();
+    // 序列化
+    std::string packProtobuf(const std::string& service_name, const std::string& method_name, const google::protobuf::Message& request);
     std::string packProtoHeader(const std::string& service_name, const std::string& method_name);
     std::string packProtoBody(const google::protobuf::Message& request);
-    std::string packProtobuf(const std::string& service_name, const std::string& method_name, const google::protobuf::Message& request);
 
 private:
     // 缓冲区

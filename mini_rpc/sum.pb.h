@@ -44,6 +44,12 @@ struct TableStruct_sum_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_sum_2eproto;
+class DevideRequest;
+struct DevideRequestDefaultTypeInternal;
+extern DevideRequestDefaultTypeInternal _DevideRequest_default_instance_;
+class DevideResponse;
+struct DevideResponseDefaultTypeInternal;
+extern DevideResponseDefaultTypeInternal _DevideResponse_default_instance_;
 class SumRequest;
 struct SumRequestDefaultTypeInternal;
 extern SumRequestDefaultTypeInternal _SumRequest_default_instance_;
@@ -51,6 +57,8 @@ class SumResponse;
 struct SumResponseDefaultTypeInternal;
 extern SumResponseDefaultTypeInternal _SumResponse_default_instance_;
 PROTOBUF_NAMESPACE_OPEN
+template<> ::DevideRequest* Arena::CreateMaybeMessage<::DevideRequest>(Arena*);
+template<> ::DevideResponse* Arena::CreateMaybeMessage<::DevideResponse>(Arena*);
 template<> ::SumRequest* Arena::CreateMaybeMessage<::SumRequest>(Arena*);
 template<> ::SumResponse* Arena::CreateMaybeMessage<::SumResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -362,6 +370,313 @@ class SumResponse final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_sum_2eproto;
 };
+// -------------------------------------------------------------------
+
+class DevideRequest final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:DevideRequest) */ {
+ public:
+  inline DevideRequest() : DevideRequest(nullptr) {}
+  ~DevideRequest() override;
+  explicit PROTOBUF_CONSTEXPR DevideRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DevideRequest(const DevideRequest& from);
+  DevideRequest(DevideRequest&& from) noexcept
+    : DevideRequest() {
+    *this = ::std::move(from);
+  }
+
+  inline DevideRequest& operator=(const DevideRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DevideRequest& operator=(DevideRequest&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DevideRequest& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DevideRequest* internal_default_instance() {
+    return reinterpret_cast<const DevideRequest*>(
+               &_DevideRequest_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(DevideRequest& a, DevideRequest& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DevideRequest* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DevideRequest* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DevideRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DevideRequest>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DevideRequest& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DevideRequest& from) {
+    DevideRequest::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DevideRequest* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "DevideRequest";
+  }
+  protected:
+  explicit DevideRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kAFieldNumber = 1,
+    kBFieldNumber = 2,
+  };
+  // int32 a = 1;
+  void clear_a();
+  int32_t a() const;
+  void set_a(int32_t value);
+  private:
+  int32_t _internal_a() const;
+  void _internal_set_a(int32_t value);
+  public:
+
+  // int32 b = 2;
+  void clear_b();
+  int32_t b() const;
+  void set_b(int32_t value);
+  private:
+  int32_t _internal_b() const;
+  void _internal_set_b(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:DevideRequest)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    int32_t a_;
+    int32_t b_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_sum_2eproto;
+};
+// -------------------------------------------------------------------
+
+class DevideResponse final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:DevideResponse) */ {
+ public:
+  inline DevideResponse() : DevideResponse(nullptr) {}
+  ~DevideResponse() override;
+  explicit PROTOBUF_CONSTEXPR DevideResponse(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  DevideResponse(const DevideResponse& from);
+  DevideResponse(DevideResponse&& from) noexcept
+    : DevideResponse() {
+    *this = ::std::move(from);
+  }
+
+  inline DevideResponse& operator=(const DevideResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline DevideResponse& operator=(DevideResponse&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const DevideResponse& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const DevideResponse* internal_default_instance() {
+    return reinterpret_cast<const DevideResponse*>(
+               &_DevideResponse_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(DevideResponse& a, DevideResponse& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(DevideResponse* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(DevideResponse* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  DevideResponse* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DevideResponse>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const DevideResponse& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const DevideResponse& from) {
+    DevideResponse::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(DevideResponse* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "DevideResponse";
+  }
+  protected:
+  explicit DevideResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kDevideFieldNumber = 1,
+  };
+  // int32 devide = 1;
+  void clear_devide();
+  int32_t devide() const;
+  void set_devide(int32_t value);
+  private:
+  int32_t _internal_devide() const;
+  void _internal_set_devide(int32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:DevideResponse)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    int32_t devide_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_sum_2eproto;
+};
 // ===================================================================
 
 
@@ -437,9 +752,81 @@ inline void SumResponse::set_sum(int32_t value) {
   // @@protoc_insertion_point(field_set:SumResponse.sum)
 }
 
+// -------------------------------------------------------------------
+
+// DevideRequest
+
+// int32 a = 1;
+inline void DevideRequest::clear_a() {
+  _impl_.a_ = 0;
+}
+inline int32_t DevideRequest::_internal_a() const {
+  return _impl_.a_;
+}
+inline int32_t DevideRequest::a() const {
+  // @@protoc_insertion_point(field_get:DevideRequest.a)
+  return _internal_a();
+}
+inline void DevideRequest::_internal_set_a(int32_t value) {
+  
+  _impl_.a_ = value;
+}
+inline void DevideRequest::set_a(int32_t value) {
+  _internal_set_a(value);
+  // @@protoc_insertion_point(field_set:DevideRequest.a)
+}
+
+// int32 b = 2;
+inline void DevideRequest::clear_b() {
+  _impl_.b_ = 0;
+}
+inline int32_t DevideRequest::_internal_b() const {
+  return _impl_.b_;
+}
+inline int32_t DevideRequest::b() const {
+  // @@protoc_insertion_point(field_get:DevideRequest.b)
+  return _internal_b();
+}
+inline void DevideRequest::_internal_set_b(int32_t value) {
+  
+  _impl_.b_ = value;
+}
+inline void DevideRequest::set_b(int32_t value) {
+  _internal_set_b(value);
+  // @@protoc_insertion_point(field_set:DevideRequest.b)
+}
+
+// -------------------------------------------------------------------
+
+// DevideResponse
+
+// int32 devide = 1;
+inline void DevideResponse::clear_devide() {
+  _impl_.devide_ = 0;
+}
+inline int32_t DevideResponse::_internal_devide() const {
+  return _impl_.devide_;
+}
+inline int32_t DevideResponse::devide() const {
+  // @@protoc_insertion_point(field_get:DevideResponse.devide)
+  return _internal_devide();
+}
+inline void DevideResponse::_internal_set_devide(int32_t value) {
+  
+  _impl_.devide_ = value;
+}
+inline void DevideResponse::set_devide(int32_t value) {
+  _internal_set_devide(value);
+  // @@protoc_insertion_point(field_set:DevideResponse.devide)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

@@ -47,7 +47,34 @@ struct SumResponseDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SumResponseDefaultTypeInternal _SumResponse_default_instance_;
-static ::_pb::Metadata file_level_metadata_sum_2eproto[2];
+PROTOBUF_CONSTEXPR DevideRequest::DevideRequest(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.a_)*/0
+  , /*decltype(_impl_.b_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct DevideRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DevideRequestDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DevideRequestDefaultTypeInternal() {}
+  union {
+    DevideRequest _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DevideRequestDefaultTypeInternal _DevideRequest_default_instance_;
+PROTOBUF_CONSTEXPR DevideResponse::DevideResponse(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.devide_)*/0
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct DevideResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DevideResponseDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~DevideResponseDefaultTypeInternal() {}
+  union {
+    DevideResponse _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DevideResponseDefaultTypeInternal _DevideResponse_default_instance_;
+static ::_pb::Metadata file_level_metadata_sum_2eproto[4];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_sum_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_sum_2eproto = nullptr;
 
@@ -67,28 +94,50 @@ const uint32_t TableStruct_sum_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(prot
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::SumResponse, _impl_.sum_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::DevideRequest, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::DevideRequest, _impl_.a_),
+  PROTOBUF_FIELD_OFFSET(::DevideRequest, _impl_.b_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::DevideResponse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::DevideResponse, _impl_.devide_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::SumRequest)},
   { 8, -1, -1, sizeof(::SumResponse)},
+  { 15, -1, -1, sizeof(::DevideRequest)},
+  { 23, -1, -1, sizeof(::DevideResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
   &::_SumRequest_default_instance_._instance,
   &::_SumResponse_default_instance_._instance,
+  &::_DevideRequest_default_instance_._instance,
+  &::_DevideResponse_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_sum_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\tsum.proto\"\"\n\nSumRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001"
-  "b\030\002 \001(\005\"\032\n\013SumResponse\022\013\n\003sum\030\001 \001(\00525\n\021C"
-  "alculatorService\022 \n\003Sum\022\013.SumRequest\032\014.S"
-  "umResponseb\006proto3"
+  "b\030\002 \001(\005\"\032\n\013SumResponse\022\013\n\003sum\030\001 \001(\005\"%\n\rD"
+  "evideRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001b\030\002 \001(\005\" \n\016De"
+  "videResponse\022\016\n\006devide\030\001 \001(\0052`\n\021Calculat"
+  "orService\022 \n\003Sum\022\013.SumRequest\032\014.SumRespo"
+  "nse\022)\n\006Devide\022\016.DevideRequest\032\017.DevideRe"
+  "sponseb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_sum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_sum_2eproto = {
-    false, false, 138, descriptor_table_protodef_sum_2eproto,
+    false, false, 254, descriptor_table_protodef_sum_2eproto,
     "sum.proto",
-    &descriptor_table_sum_2eproto_once, nullptr, 0, 2,
+    &descriptor_table_sum_2eproto_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_sum_2eproto::offsets,
     file_level_metadata_sum_2eproto, file_level_enum_descriptors_sum_2eproto,
     file_level_service_descriptors_sum_2eproto,
@@ -489,6 +538,395 @@ void SumResponse::InternalSwap(SumResponse* other) {
       file_level_metadata_sum_2eproto[1]);
 }
 
+// ===================================================================
+
+class DevideRequest::_Internal {
+ public:
+};
+
+DevideRequest::DevideRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:DevideRequest)
+}
+DevideRequest::DevideRequest(const DevideRequest& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  DevideRequest* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.a_){}
+    , decltype(_impl_.b_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  ::memcpy(&_impl_.a_, &from._impl_.a_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.b_) -
+    reinterpret_cast<char*>(&_impl_.a_)) + sizeof(_impl_.b_));
+  // @@protoc_insertion_point(copy_constructor:DevideRequest)
+}
+
+inline void DevideRequest::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.a_){0}
+    , decltype(_impl_.b_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+DevideRequest::~DevideRequest() {
+  // @@protoc_insertion_point(destructor:DevideRequest)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void DevideRequest::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void DevideRequest::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void DevideRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:DevideRequest)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::memset(&_impl_.a_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.b_) -
+      reinterpret_cast<char*>(&_impl_.a_)) + sizeof(_impl_.b_));
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* DevideRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // int32 a = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.a_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // int32 b = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.b_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* DevideRequest::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:DevideRequest)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 a = 1;
+  if (this->_internal_a() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_a(), target);
+  }
+
+  // int32 b = 2;
+  if (this->_internal_b() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_b(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DevideRequest)
+  return target;
+}
+
+size_t DevideRequest::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DevideRequest)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int32 a = 1;
+  if (this->_internal_a() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_a());
+  }
+
+  // int32 b = 2;
+  if (this->_internal_b() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_b());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DevideRequest::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    DevideRequest::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DevideRequest::GetClassData() const { return &_class_data_; }
+
+
+void DevideRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DevideRequest*>(&to_msg);
+  auto& from = static_cast<const DevideRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:DevideRequest)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_a() != 0) {
+    _this->_internal_set_a(from._internal_a());
+  }
+  if (from._internal_b() != 0) {
+    _this->_internal_set_b(from._internal_b());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DevideRequest::CopyFrom(const DevideRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DevideRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DevideRequest::IsInitialized() const {
+  return true;
+}
+
+void DevideRequest::InternalSwap(DevideRequest* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(DevideRequest, _impl_.b_)
+      + sizeof(DevideRequest::_impl_.b_)
+      - PROTOBUF_FIELD_OFFSET(DevideRequest, _impl_.a_)>(
+          reinterpret_cast<char*>(&_impl_.a_),
+          reinterpret_cast<char*>(&other->_impl_.a_));
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DevideRequest::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_sum_2eproto_getter, &descriptor_table_sum_2eproto_once,
+      file_level_metadata_sum_2eproto[2]);
+}
+
+// ===================================================================
+
+class DevideResponse::_Internal {
+ public:
+};
+
+DevideResponse::DevideResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:DevideResponse)
+}
+DevideResponse::DevideResponse(const DevideResponse& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  DevideResponse* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.devide_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_impl_.devide_ = from._impl_.devide_;
+  // @@protoc_insertion_point(copy_constructor:DevideResponse)
+}
+
+inline void DevideResponse::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.devide_){0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+DevideResponse::~DevideResponse() {
+  // @@protoc_insertion_point(destructor:DevideResponse)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void DevideResponse::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+}
+
+void DevideResponse::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void DevideResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:DevideResponse)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.devide_ = 0;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* DevideResponse::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // int32 devide = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.devide_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* DevideResponse::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:DevideResponse)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // int32 devide = 1;
+  if (this->_internal_devide() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_devide(), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:DevideResponse)
+  return target;
+}
+
+size_t DevideResponse::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:DevideResponse)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // int32 devide = 1;
+  if (this->_internal_devide() != 0) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_devide());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DevideResponse::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    DevideResponse::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DevideResponse::GetClassData() const { return &_class_data_; }
+
+
+void DevideResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DevideResponse*>(&to_msg);
+  auto& from = static_cast<const DevideResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:DevideResponse)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_devide() != 0) {
+    _this->_internal_set_devide(from._internal_devide());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void DevideResponse::CopyFrom(const DevideResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:DevideResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DevideResponse::IsInitialized() const {
+  return true;
+}
+
+void DevideResponse::InternalSwap(DevideResponse* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.devide_, other->_impl_.devide_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata DevideResponse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_sum_2eproto_getter, &descriptor_table_sum_2eproto_once,
+      file_level_metadata_sum_2eproto[3]);
+}
+
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::SumRequest*
@@ -498,6 +936,14 @@ Arena::CreateMaybeMessage< ::SumRequest >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::SumResponse*
 Arena::CreateMaybeMessage< ::SumResponse >(Arena* arena) {
   return Arena::CreateMessageInternal< ::SumResponse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::DevideRequest*
+Arena::CreateMaybeMessage< ::DevideRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::DevideRequest >(arena);
+}
+template<> PROTOBUF_NOINLINE ::DevideResponse*
+Arena::CreateMaybeMessage< ::DevideResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::DevideResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
