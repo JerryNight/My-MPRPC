@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+// 生成 service服务类和 rpc方法描述
+option cc_generic_services = true;
+
 message SumRequest {
     int32 a = 1;
     int32 b = 2;

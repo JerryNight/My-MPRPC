@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+// 生成 service服务类和 rpc方法描述
+option cc_generic_services = true;
+
+// 加法
+message AddRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+message AddResponse {
+    int32 result = 1;
+}
+// 减法
+message SubRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+message SubResponse {
+    int32 response = 1;
+}
+// 乘法
+message MultiRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+message MultiResponse {
+    int32 response = 1;
+}
+// 除法
+message DivideRequest {
+    int32 a = 1;
+    int32 b = 2;
+}
+message DivideResponse {
+    double result = 1;
+}
+
+// 服务
+service CalculatorService {
+    rpc Add(AddRequest) returns (AddResponse);
+    rpc Sub(SubRequest) returns (SubResponse);
+    rpc Mul(MultiRequest) returns (MultiResponse);
+    rpc Div(DivideRequest) returns (DivideResponse);
+}
