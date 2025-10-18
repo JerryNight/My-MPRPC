@@ -10,6 +10,7 @@
 #include <thread>
 #include <mutex>
 #include <sys/epoll.h>
+#include "frame_codec.h"
 
 namespace rpc {
 
@@ -26,6 +27,9 @@ public:
 
     // 发送消息
     virtual bool send(const std::vector<uint8_t>& data) = 0;
+
+    // 接收消息
+    virtual bool receive(std::vector<uint8_t>& data) = 0;
 
     // 获取连接状态
     virtual ConnectionState getState() const = 0;
@@ -50,6 +54,9 @@ public:
     // 发送消息
     bool send(const std::vector<uint8_t>& data) override;
 
+    // 接收消息
+    bool receive(std::vector<uint8_t>& data) override;
+
     // 获取连接状态
     ConnectionState getState() const override;
 
@@ -73,6 +80,7 @@ private:
     std::thread event_thread_;
     std::mutex send_mutex_;
     std::vector<uint8_t> buffer_;
+    std::mutex buffer_mutex_;
 
     MessageCallback message_callback_;
     ConnectionCallback connection_callback_;
@@ -82,7 +90,7 @@ private:
     void eventLoop();
     
     // 处理读事件
-    void handleRead();
+    void handleRead(std::vector<uint8_t>& data);
     
     // 处理写事件
     bool handleWrite(const std::vector<uint8_t>& data);
@@ -92,5 +100,8 @@ private:
 
     // 处理错误
     void handleError(const std::string& error_msg);
+
+    // 读取指定长度的数据
+    bool readExactly(size_t length, std::vector<uint8_t>& data);
 };
 }

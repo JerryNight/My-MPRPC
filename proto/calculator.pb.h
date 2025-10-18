@@ -45,6 +45,7 @@ struct TableStruct_calculator_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_calculator_2eproto;
+namespace rpc {
 class AddRequest;
 struct AddRequestDefaultTypeInternal;
 extern AddRequestDefaultTypeInternal _AddRequest_default_instance_;
@@ -69,21 +70,23 @@ extern SubRequestDefaultTypeInternal _SubRequest_default_instance_;
 class SubResponse;
 struct SubResponseDefaultTypeInternal;
 extern SubResponseDefaultTypeInternal _SubResponse_default_instance_;
+}  // namespace rpc
 PROTOBUF_NAMESPACE_OPEN
-template<> ::AddRequest* Arena::CreateMaybeMessage<::AddRequest>(Arena*);
-template<> ::AddResponse* Arena::CreateMaybeMessage<::AddResponse>(Arena*);
-template<> ::DivideRequest* Arena::CreateMaybeMessage<::DivideRequest>(Arena*);
-template<> ::DivideResponse* Arena::CreateMaybeMessage<::DivideResponse>(Arena*);
-template<> ::MultiRequest* Arena::CreateMaybeMessage<::MultiRequest>(Arena*);
-template<> ::MultiResponse* Arena::CreateMaybeMessage<::MultiResponse>(Arena*);
-template<> ::SubRequest* Arena::CreateMaybeMessage<::SubRequest>(Arena*);
-template<> ::SubResponse* Arena::CreateMaybeMessage<::SubResponse>(Arena*);
+template<> ::rpc::AddRequest* Arena::CreateMaybeMessage<::rpc::AddRequest>(Arena*);
+template<> ::rpc::AddResponse* Arena::CreateMaybeMessage<::rpc::AddResponse>(Arena*);
+template<> ::rpc::DivideRequest* Arena::CreateMaybeMessage<::rpc::DivideRequest>(Arena*);
+template<> ::rpc::DivideResponse* Arena::CreateMaybeMessage<::rpc::DivideResponse>(Arena*);
+template<> ::rpc::MultiRequest* Arena::CreateMaybeMessage<::rpc::MultiRequest>(Arena*);
+template<> ::rpc::MultiResponse* Arena::CreateMaybeMessage<::rpc::MultiResponse>(Arena*);
+template<> ::rpc::SubRequest* Arena::CreateMaybeMessage<::rpc::SubRequest>(Arena*);
+template<> ::rpc::SubResponse* Arena::CreateMaybeMessage<::rpc::SubResponse>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
+namespace rpc {
 
 // ===================================================================
 
 class AddRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AddRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.AddRequest) */ {
  public:
   inline AddRequest() : AddRequest(nullptr) {}
   ~AddRequest() override;
@@ -186,7 +189,7 @@ class AddRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "AddRequest";
+    return "rpc.AddRequest";
   }
   protected:
   explicit AddRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -224,7 +227,7 @@ class AddRequest final :
   void _internal_set_b(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:AddRequest)
+  // @@protoc_insertion_point(class_scope:rpc.AddRequest)
  private:
   class _Internal;
 
@@ -242,7 +245,7 @@ class AddRequest final :
 // -------------------------------------------------------------------
 
 class AddResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:AddResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.AddResponse) */ {
  public:
   inline AddResponse() : AddResponse(nullptr) {}
   ~AddResponse() override;
@@ -345,7 +348,7 @@ class AddResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "AddResponse";
+    return "rpc.AddResponse";
   }
   protected:
   explicit AddResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -373,7 +376,7 @@ class AddResponse final :
   void _internal_set_result(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:AddResponse)
+  // @@protoc_insertion_point(class_scope:rpc.AddResponse)
  private:
   class _Internal;
 
@@ -390,7 +393,7 @@ class AddResponse final :
 // -------------------------------------------------------------------
 
 class SubRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:SubRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.SubRequest) */ {
  public:
   inline SubRequest() : SubRequest(nullptr) {}
   ~SubRequest() override;
@@ -493,7 +496,7 @@ class SubRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "SubRequest";
+    return "rpc.SubRequest";
   }
   protected:
   explicit SubRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -531,7 +534,7 @@ class SubRequest final :
   void _internal_set_b(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:SubRequest)
+  // @@protoc_insertion_point(class_scope:rpc.SubRequest)
  private:
   class _Internal;
 
@@ -549,7 +552,7 @@ class SubRequest final :
 // -------------------------------------------------------------------
 
 class SubResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:SubResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.SubResponse) */ {
  public:
   inline SubResponse() : SubResponse(nullptr) {}
   ~SubResponse() override;
@@ -652,7 +655,7 @@ class SubResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "SubResponse";
+    return "rpc.SubResponse";
   }
   protected:
   explicit SubResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -680,7 +683,7 @@ class SubResponse final :
   void _internal_set_response(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:SubResponse)
+  // @@protoc_insertion_point(class_scope:rpc.SubResponse)
  private:
   class _Internal;
 
@@ -697,7 +700,7 @@ class SubResponse final :
 // -------------------------------------------------------------------
 
 class MultiRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MultiRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.MultiRequest) */ {
  public:
   inline MultiRequest() : MultiRequest(nullptr) {}
   ~MultiRequest() override;
@@ -800,7 +803,7 @@ class MultiRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "MultiRequest";
+    return "rpc.MultiRequest";
   }
   protected:
   explicit MultiRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -838,7 +841,7 @@ class MultiRequest final :
   void _internal_set_b(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:MultiRequest)
+  // @@protoc_insertion_point(class_scope:rpc.MultiRequest)
  private:
   class _Internal;
 
@@ -856,7 +859,7 @@ class MultiRequest final :
 // -------------------------------------------------------------------
 
 class MultiResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:MultiResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.MultiResponse) */ {
  public:
   inline MultiResponse() : MultiResponse(nullptr) {}
   ~MultiResponse() override;
@@ -959,7 +962,7 @@ class MultiResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "MultiResponse";
+    return "rpc.MultiResponse";
   }
   protected:
   explicit MultiResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -987,7 +990,7 @@ class MultiResponse final :
   void _internal_set_response(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:MultiResponse)
+  // @@protoc_insertion_point(class_scope:rpc.MultiResponse)
  private:
   class _Internal;
 
@@ -1004,7 +1007,7 @@ class MultiResponse final :
 // -------------------------------------------------------------------
 
 class DivideRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:DivideRequest) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.DivideRequest) */ {
  public:
   inline DivideRequest() : DivideRequest(nullptr) {}
   ~DivideRequest() override;
@@ -1107,7 +1110,7 @@ class DivideRequest final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "DivideRequest";
+    return "rpc.DivideRequest";
   }
   protected:
   explicit DivideRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1145,7 +1148,7 @@ class DivideRequest final :
   void _internal_set_b(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:DivideRequest)
+  // @@protoc_insertion_point(class_scope:rpc.DivideRequest)
  private:
   class _Internal;
 
@@ -1163,7 +1166,7 @@ class DivideRequest final :
 // -------------------------------------------------------------------
 
 class DivideResponse final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:DivideResponse) */ {
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:rpc.DivideResponse) */ {
  public:
   inline DivideResponse() : DivideResponse(nullptr) {}
   ~DivideResponse() override;
@@ -1266,7 +1269,7 @@ class DivideResponse final :
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "DivideResponse";
+    return "rpc.DivideResponse";
   }
   protected:
   explicit DivideResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
@@ -1294,7 +1297,7 @@ class DivideResponse final :
   void _internal_set_result(double value);
   public:
 
-  // @@protoc_insertion_point(class_scope:DivideResponse)
+  // @@protoc_insertion_point(class_scope:rpc.DivideResponse)
  private:
   class _Internal;
 
@@ -1324,20 +1327,20 @@ class CalculatorService : public ::PROTOBUF_NAMESPACE_ID::Service {
   static const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* descriptor();
 
   virtual void Add(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::AddRequest* request,
-                       ::AddResponse* response,
+                       const ::rpc::AddRequest* request,
+                       ::rpc::AddResponse* response,
                        ::google::protobuf::Closure* done);
   virtual void Sub(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::SubRequest* request,
-                       ::SubResponse* response,
+                       const ::rpc::SubRequest* request,
+                       ::rpc::SubResponse* response,
                        ::google::protobuf::Closure* done);
   virtual void Mul(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::MultiRequest* request,
-                       ::MultiResponse* response,
+                       const ::rpc::MultiRequest* request,
+                       ::rpc::MultiResponse* response,
                        ::google::protobuf::Closure* done);
   virtual void Div(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::DivideRequest* request,
-                       ::DivideResponse* response,
+                       const ::rpc::DivideRequest* request,
+                       ::rpc::DivideResponse* response,
                        ::google::protobuf::Closure* done);
 
   // implements Service ----------------------------------------------
@@ -1369,20 +1372,20 @@ class CalculatorService_Stub : public CalculatorService {
   // implements CalculatorService ------------------------------------------
 
   void Add(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::AddRequest* request,
-                       ::AddResponse* response,
+                       const ::rpc::AddRequest* request,
+                       ::rpc::AddResponse* response,
                        ::google::protobuf::Closure* done);
   void Sub(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::SubRequest* request,
-                       ::SubResponse* response,
+                       const ::rpc::SubRequest* request,
+                       ::rpc::SubResponse* response,
                        ::google::protobuf::Closure* done);
   void Mul(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::MultiRequest* request,
-                       ::MultiResponse* response,
+                       const ::rpc::MultiRequest* request,
+                       ::rpc::MultiResponse* response,
                        ::google::protobuf::Closure* done);
   void Div(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                       const ::DivideRequest* request,
-                       ::DivideResponse* response,
+                       const ::rpc::DivideRequest* request,
+                       ::rpc::DivideResponse* response,
                        ::google::protobuf::Closure* done);
  private:
   ::PROTOBUF_NAMESPACE_ID::RpcChannel* channel_;
@@ -1410,7 +1413,7 @@ inline int32_t AddRequest::_internal_a() const {
   return _impl_.a_;
 }
 inline int32_t AddRequest::a() const {
-  // @@protoc_insertion_point(field_get:AddRequest.a)
+  // @@protoc_insertion_point(field_get:rpc.AddRequest.a)
   return _internal_a();
 }
 inline void AddRequest::_internal_set_a(int32_t value) {
@@ -1419,7 +1422,7 @@ inline void AddRequest::_internal_set_a(int32_t value) {
 }
 inline void AddRequest::set_a(int32_t value) {
   _internal_set_a(value);
-  // @@protoc_insertion_point(field_set:AddRequest.a)
+  // @@protoc_insertion_point(field_set:rpc.AddRequest.a)
 }
 
 // int32 b = 2;
@@ -1430,7 +1433,7 @@ inline int32_t AddRequest::_internal_b() const {
   return _impl_.b_;
 }
 inline int32_t AddRequest::b() const {
-  // @@protoc_insertion_point(field_get:AddRequest.b)
+  // @@protoc_insertion_point(field_get:rpc.AddRequest.b)
   return _internal_b();
 }
 inline void AddRequest::_internal_set_b(int32_t value) {
@@ -1439,7 +1442,7 @@ inline void AddRequest::_internal_set_b(int32_t value) {
 }
 inline void AddRequest::set_b(int32_t value) {
   _internal_set_b(value);
-  // @@protoc_insertion_point(field_set:AddRequest.b)
+  // @@protoc_insertion_point(field_set:rpc.AddRequest.b)
 }
 
 // -------------------------------------------------------------------
@@ -1454,7 +1457,7 @@ inline int32_t AddResponse::_internal_result() const {
   return _impl_.result_;
 }
 inline int32_t AddResponse::result() const {
-  // @@protoc_insertion_point(field_get:AddResponse.result)
+  // @@protoc_insertion_point(field_get:rpc.AddResponse.result)
   return _internal_result();
 }
 inline void AddResponse::_internal_set_result(int32_t value) {
@@ -1463,7 +1466,7 @@ inline void AddResponse::_internal_set_result(int32_t value) {
 }
 inline void AddResponse::set_result(int32_t value) {
   _internal_set_result(value);
-  // @@protoc_insertion_point(field_set:AddResponse.result)
+  // @@protoc_insertion_point(field_set:rpc.AddResponse.result)
 }
 
 // -------------------------------------------------------------------
@@ -1478,7 +1481,7 @@ inline int32_t SubRequest::_internal_a() const {
   return _impl_.a_;
 }
 inline int32_t SubRequest::a() const {
-  // @@protoc_insertion_point(field_get:SubRequest.a)
+  // @@protoc_insertion_point(field_get:rpc.SubRequest.a)
   return _internal_a();
 }
 inline void SubRequest::_internal_set_a(int32_t value) {
@@ -1487,7 +1490,7 @@ inline void SubRequest::_internal_set_a(int32_t value) {
 }
 inline void SubRequest::set_a(int32_t value) {
   _internal_set_a(value);
-  // @@protoc_insertion_point(field_set:SubRequest.a)
+  // @@protoc_insertion_point(field_set:rpc.SubRequest.a)
 }
 
 // int32 b = 2;
@@ -1498,7 +1501,7 @@ inline int32_t SubRequest::_internal_b() const {
   return _impl_.b_;
 }
 inline int32_t SubRequest::b() const {
-  // @@protoc_insertion_point(field_get:SubRequest.b)
+  // @@protoc_insertion_point(field_get:rpc.SubRequest.b)
   return _internal_b();
 }
 inline void SubRequest::_internal_set_b(int32_t value) {
@@ -1507,7 +1510,7 @@ inline void SubRequest::_internal_set_b(int32_t value) {
 }
 inline void SubRequest::set_b(int32_t value) {
   _internal_set_b(value);
-  // @@protoc_insertion_point(field_set:SubRequest.b)
+  // @@protoc_insertion_point(field_set:rpc.SubRequest.b)
 }
 
 // -------------------------------------------------------------------
@@ -1522,7 +1525,7 @@ inline int32_t SubResponse::_internal_response() const {
   return _impl_.response_;
 }
 inline int32_t SubResponse::response() const {
-  // @@protoc_insertion_point(field_get:SubResponse.response)
+  // @@protoc_insertion_point(field_get:rpc.SubResponse.response)
   return _internal_response();
 }
 inline void SubResponse::_internal_set_response(int32_t value) {
@@ -1531,7 +1534,7 @@ inline void SubResponse::_internal_set_response(int32_t value) {
 }
 inline void SubResponse::set_response(int32_t value) {
   _internal_set_response(value);
-  // @@protoc_insertion_point(field_set:SubResponse.response)
+  // @@protoc_insertion_point(field_set:rpc.SubResponse.response)
 }
 
 // -------------------------------------------------------------------
@@ -1546,7 +1549,7 @@ inline int32_t MultiRequest::_internal_a() const {
   return _impl_.a_;
 }
 inline int32_t MultiRequest::a() const {
-  // @@protoc_insertion_point(field_get:MultiRequest.a)
+  // @@protoc_insertion_point(field_get:rpc.MultiRequest.a)
   return _internal_a();
 }
 inline void MultiRequest::_internal_set_a(int32_t value) {
@@ -1555,7 +1558,7 @@ inline void MultiRequest::_internal_set_a(int32_t value) {
 }
 inline void MultiRequest::set_a(int32_t value) {
   _internal_set_a(value);
-  // @@protoc_insertion_point(field_set:MultiRequest.a)
+  // @@protoc_insertion_point(field_set:rpc.MultiRequest.a)
 }
 
 // int32 b = 2;
@@ -1566,7 +1569,7 @@ inline int32_t MultiRequest::_internal_b() const {
   return _impl_.b_;
 }
 inline int32_t MultiRequest::b() const {
-  // @@protoc_insertion_point(field_get:MultiRequest.b)
+  // @@protoc_insertion_point(field_get:rpc.MultiRequest.b)
   return _internal_b();
 }
 inline void MultiRequest::_internal_set_b(int32_t value) {
@@ -1575,7 +1578,7 @@ inline void MultiRequest::_internal_set_b(int32_t value) {
 }
 inline void MultiRequest::set_b(int32_t value) {
   _internal_set_b(value);
-  // @@protoc_insertion_point(field_set:MultiRequest.b)
+  // @@protoc_insertion_point(field_set:rpc.MultiRequest.b)
 }
 
 // -------------------------------------------------------------------
@@ -1590,7 +1593,7 @@ inline int32_t MultiResponse::_internal_response() const {
   return _impl_.response_;
 }
 inline int32_t MultiResponse::response() const {
-  // @@protoc_insertion_point(field_get:MultiResponse.response)
+  // @@protoc_insertion_point(field_get:rpc.MultiResponse.response)
   return _internal_response();
 }
 inline void MultiResponse::_internal_set_response(int32_t value) {
@@ -1599,7 +1602,7 @@ inline void MultiResponse::_internal_set_response(int32_t value) {
 }
 inline void MultiResponse::set_response(int32_t value) {
   _internal_set_response(value);
-  // @@protoc_insertion_point(field_set:MultiResponse.response)
+  // @@protoc_insertion_point(field_set:rpc.MultiResponse.response)
 }
 
 // -------------------------------------------------------------------
@@ -1614,7 +1617,7 @@ inline int32_t DivideRequest::_internal_a() const {
   return _impl_.a_;
 }
 inline int32_t DivideRequest::a() const {
-  // @@protoc_insertion_point(field_get:DivideRequest.a)
+  // @@protoc_insertion_point(field_get:rpc.DivideRequest.a)
   return _internal_a();
 }
 inline void DivideRequest::_internal_set_a(int32_t value) {
@@ -1623,7 +1626,7 @@ inline void DivideRequest::_internal_set_a(int32_t value) {
 }
 inline void DivideRequest::set_a(int32_t value) {
   _internal_set_a(value);
-  // @@protoc_insertion_point(field_set:DivideRequest.a)
+  // @@protoc_insertion_point(field_set:rpc.DivideRequest.a)
 }
 
 // int32 b = 2;
@@ -1634,7 +1637,7 @@ inline int32_t DivideRequest::_internal_b() const {
   return _impl_.b_;
 }
 inline int32_t DivideRequest::b() const {
-  // @@protoc_insertion_point(field_get:DivideRequest.b)
+  // @@protoc_insertion_point(field_get:rpc.DivideRequest.b)
   return _internal_b();
 }
 inline void DivideRequest::_internal_set_b(int32_t value) {
@@ -1643,7 +1646,7 @@ inline void DivideRequest::_internal_set_b(int32_t value) {
 }
 inline void DivideRequest::set_b(int32_t value) {
   _internal_set_b(value);
-  // @@protoc_insertion_point(field_set:DivideRequest.b)
+  // @@protoc_insertion_point(field_set:rpc.DivideRequest.b)
 }
 
 // -------------------------------------------------------------------
@@ -1658,7 +1661,7 @@ inline double DivideResponse::_internal_result() const {
   return _impl_.result_;
 }
 inline double DivideResponse::result() const {
-  // @@protoc_insertion_point(field_get:DivideResponse.result)
+  // @@protoc_insertion_point(field_get:rpc.DivideResponse.result)
   return _internal_result();
 }
 inline void DivideResponse::_internal_set_result(double value) {
@@ -1667,7 +1670,7 @@ inline void DivideResponse::_internal_set_result(double value) {
 }
 inline void DivideResponse::set_result(double value) {
   _internal_set_result(value);
-  // @@protoc_insertion_point(field_set:DivideResponse.result)
+  // @@protoc_insertion_point(field_set:rpc.DivideResponse.result)
 }
 
 #ifdef __GNUC__
@@ -1690,6 +1693,7 @@ inline void DivideResponse::set_result(double value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
+}  // namespace rpc
 
 // @@protoc_insertion_point(global_scope)
 

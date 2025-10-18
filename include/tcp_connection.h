@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include <mutex>
 
 namespace rpc {
 
@@ -16,6 +17,9 @@ public:
 
     // 发送数据
     virtual bool send(const std::vector<uint8_t>& data) = 0;
+
+    // 接收数据
+    virtual bool receive(std::vector<uint8_t>& data) = 0;
 
     // 关闭连接
     virtual void close() = 0;
@@ -31,6 +35,11 @@ public:
     virtual void setConnectionCallback(ConnectionCallback callback) = 0;
     virtual void setWriteCompleteCallback(WriteCompleteCallback callback) = 0;
     virtual void setErrorCallback(ErrorCallback callback) = 0;
+
+    virtual MessageCallback& getMessageCallback() = 0;
+    virtual ConnectionCallback& getConnectionCallback() = 0;
+    virtual WriteCompleteCallback& getWriteCompleteCallback() = 0;
+    virtual ErrorCallback& getErrorCallback() = 0;
 };
 
 class TcpConnectionImpl : public TcpConnection {
@@ -40,6 +49,9 @@ public:
 
     // 发送数据
     bool send(const std::vector<uint8_t>& data) override;
+
+    // 接收数据
+    bool receive(std::vector<uint8_t>& data) override;
 
     // 关闭连接
     void close() override;
@@ -56,13 +68,24 @@ public:
     void setWriteCompleteCallback(WriteCompleteCallback callback) override;
     void setErrorCallback(ErrorCallback callback) override;
 
+    MessageCallback& getMessageCallback() override;
+    ConnectionCallback& getConnectionCallback() override;
+    WriteCompleteCallback& getWriteCompleteCallback() override;
+    ErrorCallback& getErrorCallback() override;
+
     // 获取 socket
     int getSocketFd() const;
+    // 把数据追加到 read_buffer_
+    void appendToReadBuffer(const std::vector<uint8_t>& data);
+    // 解码一个完整的帧
+    bool decodeFrame(std::vector<uint8_t>& frame_data);
 
 private:
     int sockfd_; // 客户端fd
     std::string peer_addr_; // 对端地址
     ConnectionState state_; // 连接状态
+    std::vector<uint8_t> read_buffer_; // 读缓冲区
+    std::mutex read_buffer_mutex_; // 缓冲区锁
     MessageCallback message_callback_;
     ConnectionCallback connection_callback_;
     WriteCompleteCallback write_complete_callback_;
@@ -70,6 +93,7 @@ private:
     
     // 处理错误
     void handleError(const std::string& error_msg);
+    
 };
 
 }

@@ -185,6 +185,41 @@ namespace rpc {
         return handleWrite(data);
     }
 
+    // 接收消息
+    bool TcpClientImpl::receive(std::vector<uint8_t>& data) {
+        if (state_ != ConnectionState::CONNECTED) {
+            std::cerr << "Cannot receive: not connected" << std::endl;
+            return false;
+        }
+
+        // 先读4字节的长度前缀
+        std::vector<uint8_t> length_bytes;
+        if (!readExactly(4, length_bytes)) {
+            std::cerr << "Failed to read length prefix" << std::endl;
+            return false;
+        }
+
+        // 解析长度 网络序->主机序
+        uint32_t message_length_net;
+        std::memcpy(&message_length_net, length_bytes.data(), 4);
+        uint32_t message_length_host = ntohl(message_length_net);
+
+        // 验证长度合理性
+        const uint32_t MAX_MESSAGE_SIZE = 10 * 1024 * 1024; // 10M
+        if (message_length_host == 0 || message_length_host > MAX_MESSAGE_SIZE) {
+            std::cerr << "Invalid message length: " << message_length_host << std::endl;
+            return false;
+        }
+
+        // 读取完整消息
+        if (!readExactly(message_length_host, data)) {
+            std::cerr << "Failed to read message data" << std::endl;
+            return false;
+        }
+
+        return true;
+    }
+
     // 获取连接状态
     ConnectionState TcpClientImpl::getState() const {
         return state_;
@@ -236,7 +271,7 @@ namespace rpc {
             for (int i = 0; i < nfds; ++i) {
                 if (events[i].data.fd == sockfd_) {
                     if (events[i].events & EPOLLIN) {
-                        handleRead();
+                        handleRead(buffer_);
                     }
                     if (events[i].events & EPOLLOUT) {
                         handleWrite(buffer_);
@@ -250,12 +285,10 @@ namespace rpc {
     }
     
     // 处理读事件
-    void TcpClientImpl::handleRead() {
-        std::vector<uint8_t> buffer(4096);
-        ssize_t n = recv(sockfd_, buffer.data(), buffer.size(), 0);
+    void TcpClientImpl::handleRead(std::vector<uint8_t>& data) {
+        ssize_t n = recv(sockfd_, data.data(), data.size(), 0);
 
         if (n > 0) {
-            buffer.resize(n);
             // 调用消息回调
             if (message_callback_) {
                 // 创建一个临时的TcpConnection对象来调用回调
@@ -309,6 +342,50 @@ namespace rpc {
             handleError("Socket error: " + std::string(strerror(error)));
         } else {
             handleError("Unknown socket error");
+        }
+    }
+
+    // 读取指定长度的数据
+    bool TcpClientImpl::readExactly(size_t length, std::vector<uint8_t>& data) {
+        data.clear();
+        data.reserve(length);
+
+        std::lock_guard<std::mutex> lock(buffer_mutex_);
+
+        // 先从buffer_里读数据
+        if (!buffer_.empty()) {
+            size_t bytes_from_buffer = std::min(length, buffer_.size());
+            data.insert(data.end(), buffer_.begin(), buffer_.begin() + bytes_from_buffer);
+            buffer_.erase(buffer_.begin(), buffer_.begin() + bytes_from_buffer);
+        }
+
+        // 还需要数据，就从socket读
+        while (data.size() < length) {
+            size_t remaining = length - data.size();
+            std::vector<uint8_t> temp_buffer(remaining);
+
+            // 阻塞
+            ssize_t n = recv(sockfd_, temp_buffer.data(), remaining, 0);
+
+            if (n > 0) {
+                temp_buffer.resize(n);
+                data.insert(data.end(), temp_buffer.begin(), temp_buffer.end());
+            } else if (n == 0) {
+                std::cerr << "Connection closed by peer while reading" << std::endl;
+                return false;
+            } else {
+                if (errno == EINTR) {
+                    // 被信号中断，继续接收
+                    continue;
+                } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    // 非阻塞socket超时，继续等待
+                    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                    continue;
+                } else {
+                    std::cerr << "recv error: " << strerror(errno) << std::endl;
+                    return false;
+                }
+            }
         }
     }
 }

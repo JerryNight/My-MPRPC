@@ -20,6 +20,7 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
+namespace rpc {
 PROTOBUF_CONSTEXPR AddRequest::AddRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.a_)*/0
@@ -128,112 +129,113 @@ struct DivideResponseDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DivideResponseDefaultTypeInternal _DivideResponse_default_instance_;
+}  // namespace rpc
 static ::_pb::Metadata file_level_metadata_calculator_2eproto[8];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_calculator_2eproto = nullptr;
 static const ::_pb::ServiceDescriptor* file_level_service_descriptors_calculator_2eproto[1];
 
 const uint32_t TableStruct_calculator_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::AddRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::AddRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::AddRequest, _impl_.a_),
-  PROTOBUF_FIELD_OFFSET(::AddRequest, _impl_.b_),
+  PROTOBUF_FIELD_OFFSET(::rpc::AddRequest, _impl_.a_),
+  PROTOBUF_FIELD_OFFSET(::rpc::AddRequest, _impl_.b_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::AddResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::AddResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::AddResponse, _impl_.result_),
+  PROTOBUF_FIELD_OFFSET(::rpc::AddResponse, _impl_.result_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::SubRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::SubRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::SubRequest, _impl_.a_),
-  PROTOBUF_FIELD_OFFSET(::SubRequest, _impl_.b_),
+  PROTOBUF_FIELD_OFFSET(::rpc::SubRequest, _impl_.a_),
+  PROTOBUF_FIELD_OFFSET(::rpc::SubRequest, _impl_.b_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::SubResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::SubResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::SubResponse, _impl_.response_),
+  PROTOBUF_FIELD_OFFSET(::rpc::SubResponse, _impl_.response_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::MultiRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::MultiRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::MultiRequest, _impl_.a_),
-  PROTOBUF_FIELD_OFFSET(::MultiRequest, _impl_.b_),
+  PROTOBUF_FIELD_OFFSET(::rpc::MultiRequest, _impl_.a_),
+  PROTOBUF_FIELD_OFFSET(::rpc::MultiRequest, _impl_.b_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::MultiResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::MultiResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::MultiResponse, _impl_.response_),
+  PROTOBUF_FIELD_OFFSET(::rpc::MultiResponse, _impl_.response_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::DivideRequest, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::DivideRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::DivideRequest, _impl_.a_),
-  PROTOBUF_FIELD_OFFSET(::DivideRequest, _impl_.b_),
+  PROTOBUF_FIELD_OFFSET(::rpc::DivideRequest, _impl_.a_),
+  PROTOBUF_FIELD_OFFSET(::rpc::DivideRequest, _impl_.b_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::DivideResponse, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::rpc::DivideResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::DivideResponse, _impl_.result_),
+  PROTOBUF_FIELD_OFFSET(::rpc::DivideResponse, _impl_.result_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::AddRequest)},
-  { 8, -1, -1, sizeof(::AddResponse)},
-  { 15, -1, -1, sizeof(::SubRequest)},
-  { 23, -1, -1, sizeof(::SubResponse)},
-  { 30, -1, -1, sizeof(::MultiRequest)},
-  { 38, -1, -1, sizeof(::MultiResponse)},
-  { 45, -1, -1, sizeof(::DivideRequest)},
-  { 53, -1, -1, sizeof(::DivideResponse)},
+  { 0, -1, -1, sizeof(::rpc::AddRequest)},
+  { 8, -1, -1, sizeof(::rpc::AddResponse)},
+  { 15, -1, -1, sizeof(::rpc::SubRequest)},
+  { 23, -1, -1, sizeof(::rpc::SubResponse)},
+  { 30, -1, -1, sizeof(::rpc::MultiRequest)},
+  { 38, -1, -1, sizeof(::rpc::MultiResponse)},
+  { 45, -1, -1, sizeof(::rpc::DivideRequest)},
+  { 53, -1, -1, sizeof(::rpc::DivideResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::_AddRequest_default_instance_._instance,
-  &::_AddResponse_default_instance_._instance,
-  &::_SubRequest_default_instance_._instance,
-  &::_SubResponse_default_instance_._instance,
-  &::_MultiRequest_default_instance_._instance,
-  &::_MultiResponse_default_instance_._instance,
-  &::_DivideRequest_default_instance_._instance,
-  &::_DivideResponse_default_instance_._instance,
+  &::rpc::_AddRequest_default_instance_._instance,
+  &::rpc::_AddResponse_default_instance_._instance,
+  &::rpc::_SubRequest_default_instance_._instance,
+  &::rpc::_SubResponse_default_instance_._instance,
+  &::rpc::_MultiRequest_default_instance_._instance,
+  &::rpc::_MultiResponse_default_instance_._instance,
+  &::rpc::_DivideRequest_default_instance_._instance,
+  &::rpc::_DivideResponse_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_calculator_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020calculator.proto\"\"\n\nAddRequest\022\t\n\001a\030\001 "
-  "\001(\005\022\t\n\001b\030\002 \001(\005\"\035\n\013AddResponse\022\016\n\006result\030"
-  "\001 \001(\005\"\"\n\nSubRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001b\030\002 \001("
-  "\005\"\037\n\013SubResponse\022\020\n\010response\030\001 \001(\005\"$\n\014Mu"
-  "ltiRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001b\030\002 \001(\005\"!\n\rMult"
-  "iResponse\022\020\n\010response\030\001 \001(\005\"%\n\rDivideReq"
-  "uest\022\t\n\001a\030\001 \001(\005\022\t\n\001b\030\002 \001(\005\" \n\016DivideResp"
-  "onse\022\016\n\006result\030\001 \001(\0012\245\001\n\021CalculatorServi"
-  "ce\022 \n\003Add\022\013.AddRequest\032\014.AddResponse\022 \n\003"
-  "Sub\022\013.SubRequest\032\014.SubResponse\022$\n\003Mul\022\r."
-  "MultiRequest\032\016.MultiResponse\022&\n\003Div\022\016.Di"
-  "videRequest\032\017.DivideResponseB\003\200\001\001b\006proto"
-  "3"
+  "\n\020calculator.proto\022\003rpc\"\"\n\nAddRequest\022\t\n"
+  "\001a\030\001 \001(\005\022\t\n\001b\030\002 \001(\005\"\035\n\013AddResponse\022\016\n\006re"
+  "sult\030\001 \001(\005\"\"\n\nSubRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001b"
+  "\030\002 \001(\005\"\037\n\013SubResponse\022\020\n\010response\030\001 \001(\005\""
+  "$\n\014MultiRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001b\030\002 \001(\005\"!\n"
+  "\rMultiResponse\022\020\n\010response\030\001 \001(\005\"%\n\rDivi"
+  "deRequest\022\t\n\001a\030\001 \001(\005\022\t\n\001b\030\002 \001(\005\" \n\016Divid"
+  "eResponse\022\016\n\006result\030\001 \001(\0012\305\001\n\021Calculator"
+  "Service\022(\n\003Add\022\017.rpc.AddRequest\032\020.rpc.Ad"
+  "dResponse\022(\n\003Sub\022\017.rpc.SubRequest\032\020.rpc."
+  "SubResponse\022,\n\003Mul\022\021.rpc.MultiRequest\032\022."
+  "rpc.MultiResponse\022.\n\003Div\022\022.rpc.DivideReq"
+  "uest\032\023.rpc.DivideResponseB\003\200\001\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_calculator_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_calculator_2eproto = {
-    false, false, 481, descriptor_table_protodef_calculator_2eproto,
+    false, false, 518, descriptor_table_protodef_calculator_2eproto,
     "calculator.proto",
     &descriptor_table_calculator_2eproto_once, nullptr, 0, 8,
     schemas, file_default_instances, TableStruct_calculator_2eproto::offsets,
@@ -246,6 +248,7 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_calculat
 
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_calculator_2eproto(&descriptor_table_calculator_2eproto);
+namespace rpc {
 
 // ===================================================================
 
@@ -257,7 +260,7 @@ AddRequest::AddRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:AddRequest)
+  // @@protoc_insertion_point(arena_constructor:rpc.AddRequest)
 }
 AddRequest::AddRequest(const AddRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -271,7 +274,7 @@ AddRequest::AddRequest(const AddRequest& from)
   ::memcpy(&_impl_.a_, &from._impl_.a_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.b_) -
     reinterpret_cast<char*>(&_impl_.a_)) + sizeof(_impl_.b_));
-  // @@protoc_insertion_point(copy_constructor:AddRequest)
+  // @@protoc_insertion_point(copy_constructor:rpc.AddRequest)
 }
 
 inline void AddRequest::SharedCtor(
@@ -286,7 +289,7 @@ inline void AddRequest::SharedCtor(
 }
 
 AddRequest::~AddRequest() {
-  // @@protoc_insertion_point(destructor:AddRequest)
+  // @@protoc_insertion_point(destructor:rpc.AddRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -303,7 +306,7 @@ void AddRequest::SetCachedSize(int size) const {
 }
 
 void AddRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:AddRequest)
+// @@protoc_insertion_point(message_clear_start:rpc.AddRequest)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -361,7 +364,7 @@ failure:
 
 uint8_t* AddRequest::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:AddRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.AddRequest)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -381,12 +384,12 @@ uint8_t* AddRequest::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:AddRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.AddRequest)
   return target;
 }
 
 size_t AddRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:AddRequest)
+// @@protoc_insertion_point(message_byte_size_start:rpc.AddRequest)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -416,7 +419,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AddRequest::GetClassData() con
 void AddRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<AddRequest*>(&to_msg);
   auto& from = static_cast<const AddRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:AddRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.AddRequest)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -431,7 +434,7 @@ void AddRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
 }
 
 void AddRequest::CopyFrom(const AddRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:AddRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.AddRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -468,7 +471,7 @@ AddResponse::AddResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:AddResponse)
+  // @@protoc_insertion_point(arena_constructor:rpc.AddResponse)
 }
 AddResponse::AddResponse(const AddResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -479,7 +482,7 @@ AddResponse::AddResponse(const AddResponse& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.result_ = from._impl_.result_;
-  // @@protoc_insertion_point(copy_constructor:AddResponse)
+  // @@protoc_insertion_point(copy_constructor:rpc.AddResponse)
 }
 
 inline void AddResponse::SharedCtor(
@@ -493,7 +496,7 @@ inline void AddResponse::SharedCtor(
 }
 
 AddResponse::~AddResponse() {
-  // @@protoc_insertion_point(destructor:AddResponse)
+  // @@protoc_insertion_point(destructor:rpc.AddResponse)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -510,7 +513,7 @@ void AddResponse::SetCachedSize(int size) const {
 }
 
 void AddResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:AddResponse)
+// @@protoc_insertion_point(message_clear_start:rpc.AddResponse)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -558,7 +561,7 @@ failure:
 
 uint8_t* AddResponse::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:AddResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.AddResponse)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -572,12 +575,12 @@ uint8_t* AddResponse::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:AddResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.AddResponse)
   return target;
 }
 
 size_t AddResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:AddResponse)
+// @@protoc_insertion_point(message_byte_size_start:rpc.AddResponse)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -602,7 +605,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*AddResponse::GetClassData() co
 void AddResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<AddResponse*>(&to_msg);
   auto& from = static_cast<const AddResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:AddResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.AddResponse)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -614,7 +617,7 @@ void AddResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
 }
 
 void AddResponse::CopyFrom(const AddResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:AddResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.AddResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -646,7 +649,7 @@ SubRequest::SubRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:SubRequest)
+  // @@protoc_insertion_point(arena_constructor:rpc.SubRequest)
 }
 SubRequest::SubRequest(const SubRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -660,7 +663,7 @@ SubRequest::SubRequest(const SubRequest& from)
   ::memcpy(&_impl_.a_, &from._impl_.a_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.b_) -
     reinterpret_cast<char*>(&_impl_.a_)) + sizeof(_impl_.b_));
-  // @@protoc_insertion_point(copy_constructor:SubRequest)
+  // @@protoc_insertion_point(copy_constructor:rpc.SubRequest)
 }
 
 inline void SubRequest::SharedCtor(
@@ -675,7 +678,7 @@ inline void SubRequest::SharedCtor(
 }
 
 SubRequest::~SubRequest() {
-  // @@protoc_insertion_point(destructor:SubRequest)
+  // @@protoc_insertion_point(destructor:rpc.SubRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -692,7 +695,7 @@ void SubRequest::SetCachedSize(int size) const {
 }
 
 void SubRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:SubRequest)
+// @@protoc_insertion_point(message_clear_start:rpc.SubRequest)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -750,7 +753,7 @@ failure:
 
 uint8_t* SubRequest::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:SubRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.SubRequest)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -770,12 +773,12 @@ uint8_t* SubRequest::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:SubRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.SubRequest)
   return target;
 }
 
 size_t SubRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:SubRequest)
+// @@protoc_insertion_point(message_byte_size_start:rpc.SubRequest)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -805,7 +808,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*SubRequest::GetClassData() con
 void SubRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<SubRequest*>(&to_msg);
   auto& from = static_cast<const SubRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:SubRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.SubRequest)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -820,7 +823,7 @@ void SubRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
 }
 
 void SubRequest::CopyFrom(const SubRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:SubRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.SubRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -857,7 +860,7 @@ SubResponse::SubResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:SubResponse)
+  // @@protoc_insertion_point(arena_constructor:rpc.SubResponse)
 }
 SubResponse::SubResponse(const SubResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -868,7 +871,7 @@ SubResponse::SubResponse(const SubResponse& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.response_ = from._impl_.response_;
-  // @@protoc_insertion_point(copy_constructor:SubResponse)
+  // @@protoc_insertion_point(copy_constructor:rpc.SubResponse)
 }
 
 inline void SubResponse::SharedCtor(
@@ -882,7 +885,7 @@ inline void SubResponse::SharedCtor(
 }
 
 SubResponse::~SubResponse() {
-  // @@protoc_insertion_point(destructor:SubResponse)
+  // @@protoc_insertion_point(destructor:rpc.SubResponse)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -899,7 +902,7 @@ void SubResponse::SetCachedSize(int size) const {
 }
 
 void SubResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:SubResponse)
+// @@protoc_insertion_point(message_clear_start:rpc.SubResponse)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -947,7 +950,7 @@ failure:
 
 uint8_t* SubResponse::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:SubResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.SubResponse)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -961,12 +964,12 @@ uint8_t* SubResponse::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:SubResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.SubResponse)
   return target;
 }
 
 size_t SubResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:SubResponse)
+// @@protoc_insertion_point(message_byte_size_start:rpc.SubResponse)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -991,7 +994,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*SubResponse::GetClassData() co
 void SubResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<SubResponse*>(&to_msg);
   auto& from = static_cast<const SubResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:SubResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.SubResponse)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1003,7 +1006,7 @@ void SubResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
 }
 
 void SubResponse::CopyFrom(const SubResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:SubResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.SubResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1035,7 +1038,7 @@ MultiRequest::MultiRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:MultiRequest)
+  // @@protoc_insertion_point(arena_constructor:rpc.MultiRequest)
 }
 MultiRequest::MultiRequest(const MultiRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -1049,7 +1052,7 @@ MultiRequest::MultiRequest(const MultiRequest& from)
   ::memcpy(&_impl_.a_, &from._impl_.a_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.b_) -
     reinterpret_cast<char*>(&_impl_.a_)) + sizeof(_impl_.b_));
-  // @@protoc_insertion_point(copy_constructor:MultiRequest)
+  // @@protoc_insertion_point(copy_constructor:rpc.MultiRequest)
 }
 
 inline void MultiRequest::SharedCtor(
@@ -1064,7 +1067,7 @@ inline void MultiRequest::SharedCtor(
 }
 
 MultiRequest::~MultiRequest() {
-  // @@protoc_insertion_point(destructor:MultiRequest)
+  // @@protoc_insertion_point(destructor:rpc.MultiRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1081,7 +1084,7 @@ void MultiRequest::SetCachedSize(int size) const {
 }
 
 void MultiRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:MultiRequest)
+// @@protoc_insertion_point(message_clear_start:rpc.MultiRequest)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1139,7 +1142,7 @@ failure:
 
 uint8_t* MultiRequest::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:MultiRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.MultiRequest)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1159,12 +1162,12 @@ uint8_t* MultiRequest::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:MultiRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.MultiRequest)
   return target;
 }
 
 size_t MultiRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:MultiRequest)
+// @@protoc_insertion_point(message_byte_size_start:rpc.MultiRequest)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1194,7 +1197,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MultiRequest::GetClassData() c
 void MultiRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<MultiRequest*>(&to_msg);
   auto& from = static_cast<const MultiRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:MultiRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.MultiRequest)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1209,7 +1212,7 @@ void MultiRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::P
 }
 
 void MultiRequest::CopyFrom(const MultiRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:MultiRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.MultiRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1246,7 +1249,7 @@ MultiResponse::MultiResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:MultiResponse)
+  // @@protoc_insertion_point(arena_constructor:rpc.MultiResponse)
 }
 MultiResponse::MultiResponse(const MultiResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -1257,7 +1260,7 @@ MultiResponse::MultiResponse(const MultiResponse& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.response_ = from._impl_.response_;
-  // @@protoc_insertion_point(copy_constructor:MultiResponse)
+  // @@protoc_insertion_point(copy_constructor:rpc.MultiResponse)
 }
 
 inline void MultiResponse::SharedCtor(
@@ -1271,7 +1274,7 @@ inline void MultiResponse::SharedCtor(
 }
 
 MultiResponse::~MultiResponse() {
-  // @@protoc_insertion_point(destructor:MultiResponse)
+  // @@protoc_insertion_point(destructor:rpc.MultiResponse)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1288,7 +1291,7 @@ void MultiResponse::SetCachedSize(int size) const {
 }
 
 void MultiResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:MultiResponse)
+// @@protoc_insertion_point(message_clear_start:rpc.MultiResponse)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1336,7 +1339,7 @@ failure:
 
 uint8_t* MultiResponse::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:MultiResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.MultiResponse)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1350,12 +1353,12 @@ uint8_t* MultiResponse::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:MultiResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.MultiResponse)
   return target;
 }
 
 size_t MultiResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:MultiResponse)
+// @@protoc_insertion_point(message_byte_size_start:rpc.MultiResponse)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1380,7 +1383,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MultiResponse::GetClassData() 
 void MultiResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<MultiResponse*>(&to_msg);
   auto& from = static_cast<const MultiResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:MultiResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.MultiResponse)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1392,7 +1395,7 @@ void MultiResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
 }
 
 void MultiResponse::CopyFrom(const MultiResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:MultiResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.MultiResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1424,7 +1427,7 @@ DivideRequest::DivideRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:DivideRequest)
+  // @@protoc_insertion_point(arena_constructor:rpc.DivideRequest)
 }
 DivideRequest::DivideRequest(const DivideRequest& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -1438,7 +1441,7 @@ DivideRequest::DivideRequest(const DivideRequest& from)
   ::memcpy(&_impl_.a_, &from._impl_.a_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.b_) -
     reinterpret_cast<char*>(&_impl_.a_)) + sizeof(_impl_.b_));
-  // @@protoc_insertion_point(copy_constructor:DivideRequest)
+  // @@protoc_insertion_point(copy_constructor:rpc.DivideRequest)
 }
 
 inline void DivideRequest::SharedCtor(
@@ -1453,7 +1456,7 @@ inline void DivideRequest::SharedCtor(
 }
 
 DivideRequest::~DivideRequest() {
-  // @@protoc_insertion_point(destructor:DivideRequest)
+  // @@protoc_insertion_point(destructor:rpc.DivideRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1470,7 +1473,7 @@ void DivideRequest::SetCachedSize(int size) const {
 }
 
 void DivideRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:DivideRequest)
+// @@protoc_insertion_point(message_clear_start:rpc.DivideRequest)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1528,7 +1531,7 @@ failure:
 
 uint8_t* DivideRequest::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:DivideRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.DivideRequest)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1548,12 +1551,12 @@ uint8_t* DivideRequest::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:DivideRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.DivideRequest)
   return target;
 }
 
 size_t DivideRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:DivideRequest)
+// @@protoc_insertion_point(message_byte_size_start:rpc.DivideRequest)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1583,7 +1586,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DivideRequest::GetClassData() 
 void DivideRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<DivideRequest*>(&to_msg);
   auto& from = static_cast<const DivideRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:DivideRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.DivideRequest)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1598,7 +1601,7 @@ void DivideRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
 }
 
 void DivideRequest::CopyFrom(const DivideRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:DivideRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.DivideRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1635,7 +1638,7 @@ DivideResponse::DivideResponse(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:DivideResponse)
+  // @@protoc_insertion_point(arena_constructor:rpc.DivideResponse)
 }
 DivideResponse::DivideResponse(const DivideResponse& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
@@ -1646,7 +1649,7 @@ DivideResponse::DivideResponse(const DivideResponse& from)
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.result_ = from._impl_.result_;
-  // @@protoc_insertion_point(copy_constructor:DivideResponse)
+  // @@protoc_insertion_point(copy_constructor:rpc.DivideResponse)
 }
 
 inline void DivideResponse::SharedCtor(
@@ -1660,7 +1663,7 @@ inline void DivideResponse::SharedCtor(
 }
 
 DivideResponse::~DivideResponse() {
-  // @@protoc_insertion_point(destructor:DivideResponse)
+  // @@protoc_insertion_point(destructor:rpc.DivideResponse)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1677,7 +1680,7 @@ void DivideResponse::SetCachedSize(int size) const {
 }
 
 void DivideResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:DivideResponse)
+// @@protoc_insertion_point(message_clear_start:rpc.DivideResponse)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1725,7 +1728,7 @@ failure:
 
 uint8_t* DivideResponse::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:DivideResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:rpc.DivideResponse)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1743,12 +1746,12 @@ uint8_t* DivideResponse::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:DivideResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:rpc.DivideResponse)
   return target;
 }
 
 size_t DivideResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:DivideResponse)
+// @@protoc_insertion_point(message_byte_size_start:rpc.DivideResponse)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1777,7 +1780,7 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DivideResponse::GetClassData()
 void DivideResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<DivideResponse*>(&to_msg);
   auto& from = static_cast<const DivideResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:DivideResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:rpc.DivideResponse)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1793,7 +1796,7 @@ void DivideResponse::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const :
 }
 
 void DivideResponse::CopyFrom(const DivideResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:DivideResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:rpc.DivideResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1829,32 +1832,32 @@ const ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor* CalculatorService::GetDescript
 }
 
 void CalculatorService::Add(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                         const ::AddRequest*,
-                         ::AddResponse*,
+                         const ::rpc::AddRequest*,
+                         ::rpc::AddResponse*,
                          ::google::protobuf::Closure* done) {
   controller->SetFailed("Method Add() not implemented.");
   done->Run();
 }
 
 void CalculatorService::Sub(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                         const ::SubRequest*,
-                         ::SubResponse*,
+                         const ::rpc::SubRequest*,
+                         ::rpc::SubResponse*,
                          ::google::protobuf::Closure* done) {
   controller->SetFailed("Method Sub() not implemented.");
   done->Run();
 }
 
 void CalculatorService::Mul(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                         const ::MultiRequest*,
-                         ::MultiResponse*,
+                         const ::rpc::MultiRequest*,
+                         ::rpc::MultiResponse*,
                          ::google::protobuf::Closure* done) {
   controller->SetFailed("Method Mul() not implemented.");
   done->Run();
 }
 
 void CalculatorService::Div(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                         const ::DivideRequest*,
-                         ::DivideResponse*,
+                         const ::rpc::DivideRequest*,
+                         ::rpc::DivideResponse*,
                          ::google::protobuf::Closure* done) {
   controller->SetFailed("Method Div() not implemented.");
   done->Run();
@@ -1869,33 +1872,33 @@ void CalculatorService::CallMethod(const ::PROTOBUF_NAMESPACE_ID::MethodDescript
   switch(method->index()) {
     case 0:
       Add(controller,
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::AddRequest*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::rpc::AddRequest*>(
                  request),
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::AddResponse*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::rpc::AddResponse*>(
                  response),
              done);
       break;
     case 1:
       Sub(controller,
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::SubRequest*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::rpc::SubRequest*>(
                  request),
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::SubResponse*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::rpc::SubResponse*>(
                  response),
              done);
       break;
     case 2:
       Mul(controller,
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::MultiRequest*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::rpc::MultiRequest*>(
                  request),
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::MultiResponse*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::rpc::MultiResponse*>(
                  response),
              done);
       break;
     case 3:
       Div(controller,
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::DivideRequest*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<const ::rpc::DivideRequest*>(
                  request),
-             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::DivideResponse*>(
+             ::PROTOBUF_NAMESPACE_ID::internal::DownCast<::rpc::DivideResponse*>(
                  response),
              done);
       break;
@@ -1910,13 +1913,13 @@ const ::PROTOBUF_NAMESPACE_ID::Message& CalculatorService::GetRequestPrototype(
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
-      return ::AddRequest::default_instance();
+      return ::rpc::AddRequest::default_instance();
     case 1:
-      return ::SubRequest::default_instance();
+      return ::rpc::SubRequest::default_instance();
     case 2:
-      return ::MultiRequest::default_instance();
+      return ::rpc::MultiRequest::default_instance();
     case 3:
-      return ::DivideRequest::default_instance();
+      return ::rpc::DivideRequest::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
@@ -1929,13 +1932,13 @@ const ::PROTOBUF_NAMESPACE_ID::Message& CalculatorService::GetResponsePrototype(
   GOOGLE_DCHECK_EQ(method->service(), descriptor());
   switch(method->index()) {
     case 0:
-      return ::AddResponse::default_instance();
+      return ::rpc::AddResponse::default_instance();
     case 1:
-      return ::SubResponse::default_instance();
+      return ::rpc::SubResponse::default_instance();
     case 2:
-      return ::MultiResponse::default_instance();
+      return ::rpc::MultiResponse::default_instance();
     case 3:
-      return ::DivideResponse::default_instance();
+      return ::rpc::DivideResponse::default_instance();
     default:
       GOOGLE_LOG(FATAL) << "Bad method index; this should never happen.";
       return *::PROTOBUF_NAMESPACE_ID::MessageFactory::generated_factory()
@@ -1955,67 +1958,68 @@ CalculatorService_Stub::~CalculatorService_Stub() {
 }
 
 void CalculatorService_Stub::Add(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                              const ::AddRequest* request,
-                              ::AddResponse* response,
+                              const ::rpc::AddRequest* request,
+                              ::rpc::AddResponse* response,
                               ::google::protobuf::Closure* done) {
   channel_->CallMethod(descriptor()->method(0),
                        controller, request, response, done);
 }
 void CalculatorService_Stub::Sub(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                              const ::SubRequest* request,
-                              ::SubResponse* response,
+                              const ::rpc::SubRequest* request,
+                              ::rpc::SubResponse* response,
                               ::google::protobuf::Closure* done) {
   channel_->CallMethod(descriptor()->method(1),
                        controller, request, response, done);
 }
 void CalculatorService_Stub::Mul(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                              const ::MultiRequest* request,
-                              ::MultiResponse* response,
+                              const ::rpc::MultiRequest* request,
+                              ::rpc::MultiResponse* response,
                               ::google::protobuf::Closure* done) {
   channel_->CallMethod(descriptor()->method(2),
                        controller, request, response, done);
 }
 void CalculatorService_Stub::Div(::PROTOBUF_NAMESPACE_ID::RpcController* controller,
-                              const ::DivideRequest* request,
-                              ::DivideResponse* response,
+                              const ::rpc::DivideRequest* request,
+                              ::rpc::DivideResponse* response,
                               ::google::protobuf::Closure* done) {
   channel_->CallMethod(descriptor()->method(3),
                        controller, request, response, done);
 }
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace rpc
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::AddRequest*
-Arena::CreateMaybeMessage< ::AddRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::AddRequest >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::AddRequest*
+Arena::CreateMaybeMessage< ::rpc::AddRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::AddRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::AddResponse*
-Arena::CreateMaybeMessage< ::AddResponse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::AddResponse >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::AddResponse*
+Arena::CreateMaybeMessage< ::rpc::AddResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::AddResponse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::SubRequest*
-Arena::CreateMaybeMessage< ::SubRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SubRequest >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::SubRequest*
+Arena::CreateMaybeMessage< ::rpc::SubRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::SubRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::SubResponse*
-Arena::CreateMaybeMessage< ::SubResponse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SubResponse >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::SubResponse*
+Arena::CreateMaybeMessage< ::rpc::SubResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::SubResponse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::MultiRequest*
-Arena::CreateMaybeMessage< ::MultiRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::MultiRequest >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::MultiRequest*
+Arena::CreateMaybeMessage< ::rpc::MultiRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::MultiRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::MultiResponse*
-Arena::CreateMaybeMessage< ::MultiResponse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::MultiResponse >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::MultiResponse*
+Arena::CreateMaybeMessage< ::rpc::MultiResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::MultiResponse >(arena);
 }
-template<> PROTOBUF_NOINLINE ::DivideRequest*
-Arena::CreateMaybeMessage< ::DivideRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::DivideRequest >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::DivideRequest*
+Arena::CreateMaybeMessage< ::rpc::DivideRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::DivideRequest >(arena);
 }
-template<> PROTOBUF_NOINLINE ::DivideResponse*
-Arena::CreateMaybeMessage< ::DivideResponse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::DivideResponse >(arena);
+template<> PROTOBUF_NOINLINE ::rpc::DivideResponse*
+Arena::CreateMaybeMessage< ::rpc::DivideResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::rpc::DivideResponse >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

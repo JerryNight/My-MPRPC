@@ -231,6 +231,10 @@ namespace rpc {
             handleClientRead(connection);
         }
 
+        if (event.events & EPOLLOUT) {
+            
+        }
+
         if (event.events & (EPOLLERR | EPOLLHUP)) {
             handleClientClose(connection);
         }
@@ -244,8 +248,17 @@ namespace rpc {
         if (n > 0) {
             // TODO 接收到数据，调用消息处理回调
             buffer.resize(n);
-            // 直接输出了
-            std::cout << "Received " << n << " bytes from " << connection->getRemoteAddress() << std::endl;
+            // 把数据追加到connection里的读缓冲区
+            connection->appendToReadBuffer(buffer);
+            // 尝试解码完整的帧
+            std::vector<uint8_t> frame_data;
+            // 使用while循环，解决粘包问题（一次接收到多个请求）
+            while (connection->decodeFrame(frame_data)) {
+                // 触发 MessageCallback -> 调用 rpc_server 里的parseRequest
+                if (connection->getMessageCallback()) {
+                    connection->getMessageCallback()(connection->shared_from_this(), frame_data);
+                }
+            }
         } else if (n == 0) {
             handleClientClose(connection);
         } else {

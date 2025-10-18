@@ -5,6 +5,8 @@
 #include <fcntl.h>           // 文件控制头文件
 #include <errno.h>           // 错误号定义头文件
 #include <cstring>           // 字符串操作头文件 strerror
+#include <arpa/inet.h>       // 网络地址转换头文件
+#include <iostream>
 
 namespace rpc {
 
@@ -55,6 +57,11 @@ namespace rpc {
         return true;  // 发送成功
     }
 
+    // 接收数据
+    bool TcpConnectionImpl::receive(std::vector<uint8_t>& data) {
+
+    }
+
     // 关闭连接
     void TcpConnectionImpl::close() {
         if (state_ != ConnectionState::DISCONNECTED) {  // 如果连接未断开
@@ -90,6 +97,18 @@ namespace rpc {
     void TcpConnectionImpl::setErrorCallback(ErrorCallback callback) {
         error_callback_ = std::move(callback);
     }
+    MessageCallback& TcpConnectionImpl::getMessageCallback() {
+        return message_callback_;
+    }
+    ConnectionCallback& TcpConnectionImpl::getConnectionCallback() {
+        return connection_callback_;
+    }
+    WriteCompleteCallback& TcpConnectionImpl::getWriteCompleteCallback() {
+        return write_complete_callback_;
+    }
+    ErrorCallback& TcpConnectionImpl::getErrorCallback() {
+        return error_callback_;
+    }
 
     // 获取 sockfd
     int TcpConnectionImpl::getSocketFd() const {
@@ -103,6 +122,46 @@ namespace rpc {
             // 调用回调函数
             error_callback_(shared_from_this(), error_msg);
         }
+    }
+
+    // 把数据追加到 read_buffer_
+    void TcpConnectionImpl::appendToReadBuffer(const std::vector<uint8_t>& data) {
+        std::lock_guard<std::mutex> lock(read_buffer_mutex_);
+        read_buffer_.insert(read_buffer_.end(), data.begin(), data.end());
+    }
+
+    // 解码一个完整的帧
+    bool TcpConnectionImpl::decodeFrame(std::vector<uint8_t>& frame_data) {
+        std::lock_guard<std::mutex> lock(read_buffer_mutex_);
+        if (read_buffer_.size() < 4) {
+            return false;
+        }
+        // 读数据头 网络序->主机序
+        uint32_t length_net;
+        std::memcpy(&length_net, read_buffer_.data(), 4);
+        uint32_t length_host = ntohl(length_net);
+        // 验证长度
+        const uint32_t MAX_FRAME_SIZE = 10 * 1024 * 1024;
+        if (length_host == 0 || length_host > MAX_FRAME_SIZE) {
+            std::cerr << "Invalid frame length: " << length_host << std::endl;
+            read_buffer_.clear();  // 清空缓冲区，防止一直出错
+            return false;
+        }
+        // 检查是否有完整帧
+        if (read_buffer_.size() < length_host + 4) {
+            // 半包
+            return false;
+        }
+
+        // 提取完整帧
+        frame_data.clear();
+        frame_data.insert(frame_data.end(), 
+                          read_buffer_.data() + 4, 
+                          read_buffer_.data() + 4 + length_host);
+        // 缓冲区删除已处理的数据
+        read_buffer_.erase(read_buffer_.begin(), read_buffer_.begin() + 4 + length_host);
+        
+        return true;
     }
 
 

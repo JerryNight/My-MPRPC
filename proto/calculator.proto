@@ -1,5 +1,6 @@
 syntax = "proto3";
 
+package rpc;
 // 生成 service服务类和 rpc方法描述
 option cc_generic_services = true;
 
