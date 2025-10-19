@@ -1,4 +1,4 @@
-#include "../../include/load_balancer.h"
+#include "load_balancer.h"
 #include <stdexcept>
 #include <iostream>
 
@@ -63,7 +63,7 @@ bool LoadBalancerFactory::isSupported(const std::string& name) const {
 }
 
 // 静态方法-创建负载均衡器
-std::unique_ptr<LoadBalancer> LoadBalancerFactory::createLoadBalancer(const std::string& name, const std::unordered_map<std::string, std::string>& config = {}) {
+std::unique_ptr<LoadBalancer> LoadBalancerFactory::createLoadBalancer(const std::string& name, const std::unordered_map<std::string, std::string>& config) {
     return getInstance().create(name, config);
 }
 std::vector<std::string> LoadBalancerFactory::getSupportedLoadBalancers() {

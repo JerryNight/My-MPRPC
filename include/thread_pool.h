@@ -69,7 +69,7 @@ private:
 template<typename Func, typename... Args>
 auto ThreadPool::submit(Func&& func, Args&&... args) -> std::future<typename std::result_of<Func(Args...)>::type> {
     if (stop_) {
-        throw std::exception("Cannot submit task to stopped thread pool");
+        throw std::runtime_error("Cannot submit task to stopped thread pool");
     }
 
     // 创建任务包装器

@@ -1,12 +1,13 @@
-#include "../../include/rpc_serser.h"
-#include "../../include/rpc_protocol_helper.h"
+#include "rpc_serser.h"
+#include "rpc_protocol_helper.h"
 #include <exception>
 
 namespace rpc {
 
 RpcServer::RpcServer(const RpcServerConfig& config) 
     : config_(config)
-     ,running_(false) {}
+     ,running_(false)
+     ,heartbeat_running_(false) {}
 
 RpcServer::~RpcServer() {
     stop();
@@ -43,6 +44,23 @@ bool RpcServer::start() {
     }
 
     running_ = true;
+
+    // 如果启动了服务注册，初始化注册中心，注册所有服务
+    if (config_.enable_registry) {
+        if (!initializeRegistry()) {
+            // 初始化失败，无法使用服务发现，服务器正常运行
+            std::cerr << "Failed to initialize registry" << std::endl;
+        } else {
+            // 注册所有服务
+            std::shared_lock<std::shared_mutex> lock(services_mutex_);
+            for (const auto& pair : services_) {
+                registerToRegistry(pair.first);
+            }
+            // 启动心跳线程
+            heartbeat_running_ = true;
+            heartbeat_thread_ = std::thread(&RpcServer::heartbeatLoop, this);
+        }
+    }
     std::cout << "RPC Server started successfully on " << config_.host << ":" << config_.port << std::endl;
     return true;
 }
@@ -53,6 +71,22 @@ void RpcServer::stop() {
         return;
     }
     running_ = false;
+
+    // 停止心跳线程
+    if (heartbeat_running_) {
+        heartbeat_running_ = false;
+        if (heartbeat_thread_.joinable()) {
+            heartbeat_thread_.join();
+        }
+    }
+
+    // 从注册中心注销所有服务
+    if (registry_) {
+        std::shared_lock<std::shared_mutex> lock(services_mutex_);
+        for (const auto& pair : services_) {
+            unregisterFromRegistry(pair.first);
+        }
+    }
 
     // 停止 tcp 服务器
     if (tcp_server_) {
@@ -75,14 +109,27 @@ bool RpcServer::registerService(google::protobuf::Service* service) {
     }
 
     // 注册服务
-    std::unique_lock<std::shared_mutex> lock(services_mutex_);
-    services_[service->GetDescriptor()->name()] = service;
+    std::string service_name = service->GetDescriptor()->name();
+    {
+        // 注册到本地
+        std::unique_lock<std::shared_mutex> lock(services_mutex_);
+        services_[service_name] = service;
+    }
+    // 注册到 zookeeper
+    if (running_.load() && config_.enable_registry && registry_) {
+        registerToRegistry(service_name);
+    }
     std::cout << "Registered service: " << service->GetDescriptor()->name() << std::endl;
     return true;
 }
 
 // 注销服务
 bool RpcServer::unregisterService(const std::string& service_name) {
+    // 先从注册中心注销服务
+    if (config_.enable_registry && registry_) {
+        unregisterFromRegistry(service_name);
+    }
+    // 在从本地注销
     std::unique_lock<std::shared_mutex> lock(services_mutex_);
     auto it = services_.find(service_name);
     if (it != services_.end()) {
@@ -183,17 +230,23 @@ void RpcServer::handleMessage(std::shared_ptr<TcpConnection> connection, const s
 
 // 处理rpc请求
 void RpcServer::handleRpcRequest(std::shared_ptr<TcpConnection> connection, const std::vector<uint8_t>& request_data) {
+    std::cout << "[DEBUG SERVER] handleRpcRequest: received " << request_data.size() << " bytes" << std::endl;
+
     try {
         // 解析RPC请求
         RpcRequest request = parseRpcRequest(request_data);
+        std::cout << "[DEBUG SERVER] Parsed request: service=" << request.service_name 
+                  << ", method=" << request.method_name 
+                  << ", request_id=" << request.request_id << std::endl;
     
         // 调用服务方法
-        std::vector<uint8_t> response_data = callServiceMethod(request.service_name, request.method_name, request.data);
+        std::vector<uint8_t> response_data = callServiceMethod(request.service_name, request.method_name, request.request_data);
+        std::cout << "[DEBUG SERVER] Service method returned " << response_data.size() << " bytes" << std::endl;
     
         // 创建RPC响应
         RpcResponse response;
         response.request_id = request.request_id;
-        response.data = response_data;
+        response.response_data = response_data;
         response.success = true;
     
         // 发送响应
@@ -229,18 +282,25 @@ void RpcServer::handleError(std::shared_ptr<TcpConnection> connection, const std
 // 发送响应
 void RpcServer::sendResponse(std::shared_ptr<TcpConnection> connection, const RpcResponse& response) {
     if (!connection) {
+        std::cerr << "[DEBUG SERVER] sendResponse: connection is null!" << std::endl;
         return;
     }
+    std::cout << "[DEBUG SERVER] Preparing to send response, request_id: " << response.request_id 
+              << ", success: " << response.success << std::endl;
 
     // 序列化响应
     auto response_proto_data = serializeRpcResponse(response);
+    std::cout << "[DEBUG SERVER] Serialized response data size: " << response_proto_data.size() << " bytes" << std::endl;
 
     // 编码+帧前缀
     auto response_proto_encode = frame_codec_->encode(response_proto_data);
+    std::cout << "[DEBUG SERVER] Encoded response size (with frame): " << response_proto_encode.size() << " bytes" << std::endl;
 
     // 发送
     if (!connection->send(response_proto_encode)) {
         std::cerr << "Failed to send response to " << connection->getRemoteAddress() << std::endl;
+    } else {
+        std::cout << "[DEBUG SERVER] Encoded response size (with frame): " << response_proto_encode.size() << " bytes" << std::endl;
     }
 }
 
@@ -310,5 +370,109 @@ std::vector<uint8_t> RpcServer::callServiceMethod(const std::string& service_nam
     return std::vector<uint8_t>(response_data.begin(), response_data.end());
 }
 
+// 设置服务注册中心
+void RpcServer::setRegistry(std::unique_ptr<ServiceRegistry> registry) {
+    registry_ = std::move(registry);
+}
+
+// 获取注册中心
+ServiceRegistry* RpcServer::getRegistry() const {
+    return registry_.get();
+}
+
+// 注册服务到注册中心
+bool RpcServer::registerToRegistry(const std::string& service_name) {
+    if (!registry_) {
+        std::cerr << "Registry not initialized" << std::endl;
+        return false;
+    }
+    try {
+        ServiceInstance instance(
+            service_name,
+            config_.host = "0.0.0.0" ? "127.0.0.1" : config_.host,
+            config_.port,
+            config_.service_weight
+        );
+    
+        // 注册到注册中心
+        if (registry_->registerService(instance)) {
+            std::cout << "Registered service to registry: " << service_name << " @ " << instance.getId() << std::endl;
+            return true;
+        } else {
+            std::cerr << "Failed to register service to registry: " << service_name << std::endl;
+            return false;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Exception registering service: " << e.what() << std::endl;
+    }
+    return false;
+}
+
+// 从注册中心注销服务
+bool RpcServer::unregisterFromRegistry(const std::string& service_name) {
+    if (!registry_) {
+        return false;
+    }
+
+    try {
+        std::string instance_id = (config_.host == "0.0.0.0" ? "127.0.0.1" : config_.host) + ":" + std::to_string(config_.port);
+        if (registry_->unregisterService(service_name, instance_id)) {
+            std::cout << "Unregistered service from registry: " << service_name << " @ " << instance_id << std::endl;
+            return true;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Exception unregistering service: " << e.what() << std::endl;
+    }
+    return false;
+}
+
+// 心跳线程函数
+void RpcServer::heartbeatLoop() {
+    std::cout << "Heartbeat thread started" << std::endl;
+
+    while (heartbeat_running_.load()) {
+        try {
+            // 获取所有已注册服务
+            std::vector<std::string> service_names;
+            {
+                std::shared_lock<std::shared_mutex> lock(services_mutex_);
+                for (const auto& pair : services_) {
+                    service_names.push_back(pair.first);
+                }
+            }
+            // 向注册中心发送心跳
+            if (registry_) {
+                std::string instance_id = (config_.host == "0.0.0.0" ? "127.0.0.1" : config_.host) + ":" + std::to_string(config_.port);
+                for (const auto& service_name : service_names) {
+                    if (!registry_->sendHeartbeat(service_name, instance_id)) {
+                        std::cerr << "Failed to send heartbeat for service: " << service_name << std::endl;
+                    }
+                }
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "Exception in heartbeat loop: " << e.what() << std::endl;
+        }
+
+        // 等待下一个心跳间隔
+        std::this_thread::sleep_for(std::chrono::milliseconds(config_.heartbeat_interval_ms));
+    }
+    std::cout << "Heartbeat thread stopped" << std::endl;
+}
+
+// 初始化服务注册中心
+bool RpcServer::initializeRegistry() {
+    if (!config_.enable_registry) {
+        return false;
+    }
+
+    // 使用工厂方法创建注册中心
+    registry_ = RegistryFactory::createZooKeeperRegistry();
+    if (!registry_) {
+        std::cerr << "Failed to create registry: " << config_.registry_type << std::endl;
+        return false;
+    }
+    std::cout << "Initialized registry: " << config_.registry_type << std::endl;
+    return true;
+}
 
 }

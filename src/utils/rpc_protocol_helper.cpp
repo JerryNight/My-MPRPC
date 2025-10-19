@@ -1,5 +1,5 @@
-#include "../../include/rpc_protocol_helper.h"
-#include "../../include/transport.h"
+#include "rpc_protocol_helper.h"
+#include "transport.h"
 #include <iostream>
 #include <stdexcept>
 
@@ -100,7 +100,7 @@ RpcResponseProto RpcProtocolHelper::createResponseProto(const RpcResponse& respo
 
     proto.set_request_id(response.request_id);
     proto.set_success(response.success);
-    proto.set_response_data(response.response_data.begin(), response.response_data.end());
+    proto.set_response_data(response.response_data.data(), response.response_data.size());
 
     // 设置错误细腻
     if (!response.success) {

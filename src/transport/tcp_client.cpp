@@ -1,4 +1,4 @@
-#include "../../include/tcp_client.h"
+#include "tcp_client.h"
 #include <sys/socket.h>      // 系统socket相关头文件
 #include <netinet/in.h>      // 网络地址结构头文件
 #include <arpa/inet.h>       // 网络地址转换头文件
@@ -123,33 +123,33 @@ namespace rpc {
         state_ = ConnectionState::CONNECTED;
         server_addr_ = host + ":" + std::to_string(port);
 
-        // 创建 epoll
-        epoll_fd_ = epoll_create1(EPOLL_CLOEXEC);
-        if (epoll_fd_ == -1) {
-            std::cerr << "Failed to create epoll: " << strerror(errno) << std::endl;
-            close(sockfd_);
-            sockfd_ = -1;
-            state_ = ConnectionState::DISCONNECTED;
-            return false;
-        }
+        // // 创建 epoll - 异步模式
+        // epoll_fd_ = epoll_create1(EPOLL_CLOEXEC);
+        // if (epoll_fd_ == -1) {
+        //     std::cerr << "Failed to create epoll: " << strerror(errno) << std::endl;
+        //     close(sockfd_);
+        //     sockfd_ = -1;
+        //     state_ = ConnectionState::DISCONNECTED;
+        //     return false;
+        // }
 
         // 将socket添加到epoll
-        struct epoll_event event;
-        event.events = EPOLLIN | EPOLLET;  // 边沿触发
-        event.data.fd = sockfd_;
-        if (epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, sockfd_, &event) == -1) {
-            std::cerr << "Failed to add socket to epoll: " << strerror(errno) << std::endl;
-            close(epoll_fd_);
-            close(sockfd_);
-            epoll_fd_ = -1;
-            sockfd_ = -1;
-            state_ = ConnectionState::DISCONNECTED;
-            return false;
-        }
+        // struct epoll_event event;
+        // event.events = EPOLLIN | EPOLLET;  // 边沿触发
+        // event.data.fd = sockfd_;
+        // if (epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, sockfd_, &event) == -1) {
+        //     std::cerr << "Failed to add socket to epoll: " << strerror(errno) << std::endl;
+        //     close(epoll_fd_);
+        //     close(sockfd_);
+        //     epoll_fd_ = -1;
+        //     sockfd_ = -1;
+        //     state_ = ConnectionState::DISCONNECTED;
+        //     return false;
+        // }
 
         // 启动事件循环线程
-        running_ = true;
-        event_thread_ = std::thread(&TcpClientImpl::eventLoop, this);
+        // running_ = true;
+        // event_thread_ = std::thread(&TcpClientImpl::eventLoop, this);
 
         // TUDO 调用连接回调。
 
@@ -163,12 +163,12 @@ namespace rpc {
             state_ = ConnectionState::DISCONNECTING;
             running_ = false;
             if (sockfd_ != -1) {
-                close(sockfd_);
+                ::close(sockfd_);
                 sockfd_ = -1;
             }
             // 关闭epoll
             if (epoll_fd_ != -1) {
-                close(epoll_fd_);
+                ::close(epoll_fd_);
                 epoll_fd_ = -1;
             }
             // 等待事件循环线程结束
@@ -191,6 +191,7 @@ namespace rpc {
             std::cerr << "Cannot receive: not connected" << std::endl;
             return false;
         }
+        std::cout << "[DEBUG] Starting to receive response..." << std::endl;
 
         // 先读4字节的长度前缀
         std::vector<uint8_t> length_bytes;
@@ -198,11 +199,13 @@ namespace rpc {
             std::cerr << "Failed to read length prefix" << std::endl;
             return false;
         }
+        std::cout << "[DEBUG] Read 4 bytes length prefix" << std::endl;
 
         // 解析长度 网络序->主机序
         uint32_t message_length_net;
         std::memcpy(&message_length_net, length_bytes.data(), 4);
         uint32_t message_length_host = ntohl(message_length_net);
+        std::cout << "[DEBUG] Message length: " << message_length_host << " bytes" << std::endl;
 
         // 验证长度合理性
         const uint32_t MAX_MESSAGE_SIZE = 10 * 1024 * 1024; // 10M
@@ -212,10 +215,19 @@ namespace rpc {
         }
 
         // 读取完整消息
-        if (!readExactly(message_length_host, data)) {
+        std::cout << "[DEBUG receive()] Before readExactly, data.size() = " << data.size() 
+                  << ", data.data() = " << (void*)data.data() << std::endl;
+        bool result = readExactly(message_length_host, data);
+        std::cout << "[DEBUG receive()] IMMEDIATELY After readExactly, result = " << result 
+                  << ", data.size() = " << data.size() 
+                  << ", data.data() = " << (void*)data.data() << std::endl;
+
+        if (!result) {
             std::cerr << "Failed to read message data" << std::endl;
             return false;
         }
+
+        std::cout << "[DEBUG] Successfully received " << data.size() << " bytes" << std::endl;
 
         return true;
     }
@@ -348,44 +360,98 @@ namespace rpc {
     // 读取指定长度的数据
     bool TcpClientImpl::readExactly(size_t length, std::vector<uint8_t>& data) {
         data.clear();
-        data.reserve(length);
+        data.resize(length);
 
-        std::lock_guard<std::mutex> lock(buffer_mutex_);
+        // std::lock_guard<std::mutex> lock(buffer_mutex_);
 
-        // 先从buffer_里读数据
-        if (!buffer_.empty()) {
-            size_t bytes_from_buffer = std::min(length, buffer_.size());
-            data.insert(data.end(), buffer_.begin(), buffer_.begin() + bytes_from_buffer);
-            buffer_.erase(buffer_.begin(), buffer_.begin() + bytes_from_buffer);
-        }
+        // 先从buffer_里读数据 - 改为同步模式，弃用buffer
+        // if (!buffer_.empty()) {
+        //     size_t bytes_from_buffer = std::min(length, buffer_.size());
+        //     data.insert(data.end(), buffer_.begin(), buffer_.begin() + bytes_from_buffer);
+        //     buffer_.erase(buffer_.begin(), buffer_.begin() + bytes_from_buffer);
+        // }
 
         // 还需要数据，就从socket读
-        while (data.size() < length) {
-            size_t remaining = length - data.size();
-            std::vector<uint8_t> temp_buffer(remaining);
+        // while (data.size() < length) {
+        //     size_t remaining = length - data.size();
+        //     std::vector<uint8_t> temp_buffer(remaining);
 
-            // 阻塞
-            ssize_t n = recv(sockfd_, temp_buffer.data(), remaining, 0);
+        //     // 阻塞
+        //     ssize_t n = recv(sockfd_, temp_buffer.data(), remaining, 0);
+
+        //     if (n > 0) {
+        //         temp_buffer.resize(n);
+        //         data.insert(data.end(), temp_buffer.begin(), temp_buffer.end());
+        //     } else if (n == 0) {
+        //         std::cerr << "Connection closed by peer while reading" << std::endl;
+        //         return false;
+        //     } else {
+        //         if (errno == EINTR) {
+        //             // 被信号中断，继续接收
+        //             continue;
+        //         } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
+        //             // 非阻塞socket超时，继续等待
+        //             std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        //             continue;
+        //         } else {
+        //             std::cerr << "recv error: " << strerror(errno) << std::endl;
+        //             return false;
+        //         }
+        //     }
+        // }
+
+
+        std::cout << "[DEBUG readExactly] Need to read " << length << " bytes" << std::endl;
+
+        size_t total_read = 0;
+        int retry_count = 0;
+        const int MAX_RETRIES = 5000;  // 5秒超时（5000 * 1ms）
+
+        while (total_read < length) {
+            size_t remaining = length - total_read;
+            std::cout << "[DEBUG readExactly] Before recv: total_read=" << total_read 
+                      << ", remaining=" << remaining << std::endl;
+
+            ssize_t n = recv(sockfd_, data.data() + total_read, remaining, 0);
+
+            std::cout << "[DEBUG readExactly] recv returned " << n 
+                      << ", total_read=" << total_read 
+                      << ", remaining=" << remaining << std::endl;
 
             if (n > 0) {
-                temp_buffer.resize(n);
-                data.insert(data.end(), temp_buffer.begin(), temp_buffer.end());
+                std::cout << "[DEBUG readExactly] Adding " << n << " to total_read" << std::endl;
+                total_read += n;
+                std::cout << "[DEBUG readExactly] Now total_read=" << total_read << std::endl;
+                retry_count = 0;  // 重置重试计数
             } else if (n == 0) {
-                std::cerr << "Connection closed by peer while reading" << std::endl;
+                std::cerr << "[DEBUG readExactly] Connection closed by peer while reading" << std::endl;
+                state_ = ConnectionState::DISCONNECTED;
+                data.clear();
                 return false;
             } else {
                 if (errno == EINTR) {
                     // 被信号中断，继续接收
+                    std::cout << "[DEBUG readExactly] EINTR, retrying..." << std::endl;
                     continue;
                 } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
-                    // 非阻塞socket超时，继续等待
-                    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                    // 非阻塞socket，数据暂时不可用，继续等待
+                    retry_count++;
+                    if (retry_count > MAX_RETRIES) {
+                        std::cerr << "[DEBUG readExactly] Timeout waiting for data" << std::endl;
+                        data.clear();
+                        return false;
+                    }
+                    std::this_thread::sleep_for(std::chrono::milliseconds(1));
                     continue;
                 } else {
-                    std::cerr << "recv error: " << strerror(errno) << std::endl;
+                    std::cerr << "[DEBUG readExactly] recv error: " << strerror(errno) << std::endl;
+                    state_ = ConnectionState::DISCONNECTED;
+                    data.clear();
                     return false;
                 }
             }
         }
+        std::cout << "[DEBUG readExactly] Successfully read " << total_read << " bytes" << std::endl;
+        return true;
     }
 }

@@ -1,5 +1,5 @@
-#include "../../include/tcp_connection.h"
-#include "../../include/transport.h"
+#include "tcp_connection.h"
+#include "transport.h"
 #include <sys/socket.h>      // 系统socket相关头文件
 #include <unistd.h>          // Unix标准定义头文件 close
 #include <fcntl.h>           // 文件控制头文件
@@ -57,10 +57,6 @@ namespace rpc {
         return true;  // 发送成功
     }
 
-    // 接收数据
-    bool TcpConnectionImpl::receive(std::vector<uint8_t>& data) {
-
-    }
 
     // 关闭连接
     void TcpConnectionImpl::close() {

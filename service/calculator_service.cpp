@@ -1,4 +1,4 @@
-#include "../../include/calculator_service.h"
+#include "calculator_service.h"
 #include <stdexcept>
 
 
@@ -6,8 +6,8 @@ namespace rpc {
 
 
 void CalculatorServiceImpl::Add(::google::protobuf::RpcController* controller,
-                       const ::AddRequest* request,
-                       ::AddResponse* response,
+                       const ::rpc::AddRequest* request,
+                       ::rpc::AddResponse* response,
                        ::google::protobuf::Closure* done) 
 {
     try {
@@ -28,8 +28,8 @@ void CalculatorServiceImpl::Add(::google::protobuf::RpcController* controller,
 }
 
 void CalculatorServiceImpl::Sub(::google::protobuf::RpcController* controller,
-                       const ::SubRequest* request,
-                       ::SubResponse* response,
+                       const ::rpc::SubRequest* request,
+                       ::rpc::SubResponse* response,
                        ::google::protobuf::Closure* done) 
 {
     int32_t result = request->a() - request->b();
@@ -40,8 +40,8 @@ void CalculatorServiceImpl::Sub(::google::protobuf::RpcController* controller,
 }
 
 void CalculatorServiceImpl::Mul(::google::protobuf::RpcController* controller,
-                       const ::MultiRequest* request,
-                       ::MultiResponse* response,
+                       const ::rpc::MultiRequest* request,
+                       ::rpc::MultiResponse* response,
                        ::google::protobuf::Closure* done) 
 {
     int32_t result = request->a() * request->b();
@@ -52,8 +52,8 @@ void CalculatorServiceImpl::Mul(::google::protobuf::RpcController* controller,
 }
 
 void CalculatorServiceImpl::Div(::google::protobuf::RpcController* controller,
-                       const ::DivideRequest* request,
-                       ::DivideResponse* response,
+                       const ::rpc::DivideRequest* request,
+                       ::rpc::DivideResponse* response,
                        ::google::protobuf::Closure* done) 
 {
     if (request->b() == 0) {

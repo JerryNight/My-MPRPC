@@ -18,9 +18,6 @@ public:
     // 发送数据
     virtual bool send(const std::vector<uint8_t>& data) = 0;
 
-    // 接收数据
-    virtual bool receive(std::vector<uint8_t>& data) = 0;
-
     // 关闭连接
     virtual void close() = 0;
 
@@ -49,9 +46,6 @@ public:
 
     // 发送数据
     bool send(const std::vector<uint8_t>& data) override;
-
-    // 接收数据
-    bool receive(std::vector<uint8_t>& data) override;
 
     // 关闭连接
     void close() override;

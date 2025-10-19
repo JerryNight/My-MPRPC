@@ -1,4 +1,4 @@
-#include "../../include/registry_factory.h"
+#include "registry_factory.h"
 
 namespace rpc {
 

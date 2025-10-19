@@ -10,22 +10,22 @@ public:
     CalculatorServiceImpl() = default;
     ~CalculatorServiceImpl() override = default;
 
-    virtual void Add(::google::protobuf::RpcController* controller,
-                       const ::AddRequest* request,
-                       ::AddResponse* response,
-                       ::google::protobuf::Closure* done) override;
-    virtual void Sub(::google::protobuf::RpcController* controller,
-                       const ::SubRequest* request,
-                       ::SubResponse* response,
-                       ::google::protobuf::Closure* done) override;
-    virtual void Mul(::google::protobuf::RpcController* controller,
-                       const ::MultiRequest* request,
-                       ::MultiResponse* response,
-                       ::google::protobuf::Closure* done) override;
-    virtual void Div(::google::protobuf::RpcController* controller,
-                       const ::DivideRequest* request,
-                       ::DivideResponse* response,
-                       ::google::protobuf::Closure* done) override;
+  virtual void Add(::google::protobuf::RpcController* controller,
+                       const ::rpc::AddRequest* request,
+                       ::rpc::AddResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void Sub(::google::protobuf::RpcController* controller,
+                       const ::rpc::SubRequest* request,
+                       ::rpc::SubResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void Mul(::google::protobuf::RpcController* controller,
+                       const ::rpc::MultiRequest* request,
+                       ::rpc::MultiResponse* response,
+                       ::google::protobuf::Closure* done);
+  virtual void Div(::google::protobuf::RpcController* controller,
+                       const ::rpc::DivideRequest* request,
+                       ::rpc::DivideResponse* response,
+                       ::google::protobuf::Closure* done);
 };
 
 

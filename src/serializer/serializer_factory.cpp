@@ -1,4 +1,4 @@
-#include "../../include/serializer_factory.h"
+#include "serializer_factory.h"
 #include <memory>
 
 namespace rpc {
