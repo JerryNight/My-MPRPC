@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package fixbug; // 声明代码所在的包（namespace）
+
+// 登录消息类型
+message LoginRequest {
+    string name = 1;
+    string pwd = 2;
+}
+
+message ResponseCode {
+    int32 errcode = 1;
+    string errmsg = 2;
+}
+
+// 响应消息类型
+message LoginResponse {
+    ResponseCode code = 1;
+    bool success = 3;
+}
+
+message GetFriendListRequest {
+    int32 userid = 1;
+}
+message User {
+    bytes name = 1;
+    int32 age = 2;
+    enum Gender {
+        MAN = 0;
+        WOMAN = 1;
+    }
+    Gender gender = 3;
+}
+
+message GetFriendListResponse {
+    ResponseCode code = 1;
+    repeated User user_list = 2; // 用户列表
+}
