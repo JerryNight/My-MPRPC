@@ -1,11 +1,12 @@
-
-
 cmake_minimum_required(VERSION 3.10)
 project(RPC_DEMO)
 
 # 设置c++标准
 set(CMAKE_CXX_STANDARD 17)
 
+# 设置所有可执行文件和库文件的输出目录
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build/lib) # 静态库目录
 set(PROTOBUF_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/proto)
 
 # 设置头文件路径
@@ -15,65 +16,42 @@ include_directories(
 )
 
 
-# file(GLOB_RECURSE SRC_SOURSE ${PROJECT_SOURCE_DIR}/src/*.cpp)
-# # 指定生成库文件的路径
-# set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/bin)
-# # 生成静态库文件
-# add_library(myrpc STATIC ${SRC_SOURSE})
-# # 连接动态库
-# target_link_libraries(myrpc pthread protobuf zookeeper_mt)
+# 1. 编译 myrpc 静态库
+# 递归查找 src 目录下所有 .cpp 文件作为 myrpc 的源码
+file(GLOB_RECURSE MYRPC_SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
+add_library(myrpc STATIC ${MYRPC_SOURCES})
+
+# 链接 myrpc 依赖的外部库(使用PRIVATE是因为这些依赖不暴露给myrpc用户)
+target_link_libraries(myrpc PRIVATE pthread protobuf zookeeper_mt)
+
+# 公共源码文件
+file(GLOB SERVICE_SOURCES ${PROJECT_SOURCE_DIR}/service/*.cpp)
+file(GLOB PROTOBUF_GENERATED_SOURCES ${PROJECT_SOURCE_DIR}/proto/*.cc)
 
 
-# 使用myrpc静态库生成rpc_server_demo
-# set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/bin)
-# file(GLOB CALCULATOR_SERVICE ${PROJECT_SOURCE_DIR}/service/*.cpp)
-# file(GLOB PROTOBUF_DIR ${PROJECT_SOURCE_DIR}/proto/*.cc)
-# set(RPC_SERVER_DEMO ${PROJECT_SOURCE_DIR}/example/rpc_server_demo.cpp)
-# set(SOURSE ${CALCULATOR_SERVICE} ${RPC_SERVER_DEMO} ${PROTOBUF_DIR})
-# link_libraries(myrpc pthread protobuf zookeeper_mt)
-# link_directories(${PROJECT_SOURCE_DIR}/build/bin)
-# add_executable(rpc_server_demo ${SOURSE})
+# 2. 生成 rpc_server_demo 可执行文件
+set(RPC_SERVER_MAIN ${PROJECT_SOURCE_DIR}/example/rpc_server_demo.cpp)
+set(SERVER_SOURCES
+    ${SERVICE_SOURCES}
+    ${PROTOBUF_GENERATED_SOURCES}
+    ${RPC_SERVER_MAIN}
+)
+
+add_executable(rpc_server_demo ${SERVER_SOURCES})
+
+# 设置可执行文件的链接目标：
+target_link_libraries(rpc_server_demo PRIVATE myrpc pthread protobuf zookeeper_mt)
 
 
-# 使用myrpc静态库生成rpc_client_demo
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/bin)
-file(GLOB CALCULATOR_SERVICE ${PROJECT_SOURCE_DIR}/service/*.cpp)
-file(GLOB PROTOBUF_DIR ${PROJECT_SOURCE_DIR}/proto/*.cc)
-set(RPC_SERVER_DEMO ${PROJECT_SOURCE_DIR}/example/rpc_client_demo.cpp)
-set(SOURSE ${CALCULATOR_SERVICE} ${RPC_SERVER_DEMO} ${PROTOBUF_DIR})
-link_libraries(myrpc pthread protobuf zookeeper_mt)
-link_directories(${PROJECT_SOURCE_DIR}/build/bin)
-add_executable(rpc_client_demo ${SOURSE})
+# 3. 生成 rpc_client_demo 可执行文件
+set(RPC_CLIENT_MAIN ${PROJECT_SOURCE_DIR}/example/rpc_client_demo.cpp)
+set(CLIENT_SOURCES
+    ${SERVICE_SOURCES}
+    ${PROTOBUF_GENERATED_SOURCES}
+    ${RPC_CLIENT_MAIN}
+)
 
+add_executable(rpc_client_demo ${CLIENT_SOURCES})
 
-
-
-
-
-
-
-# 设置源文件
-# service.cpp 的路径
-# main函数路径
-# set(RPC_SERVER_DEMO ${PROJECT_SOURCE_DIR}/example/rpc_client_demo.cpp)
-# protoc 编译后的文件路径
-# file(GLOB PROTOBUF_DIR ${PROJECT_SOURCE_DIR}/proto/*.cc)
-
-# 指定可执行程序输出路径(当前生成的是静态库，而不是可执行程序)
-# set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/bin)
-
-# 连接静态库
-# link_libraries(myrpc pthread protobuf zookeeper_mt)
-# link_directories(${PROJECT_SOURCE_DIR}/build/bin)
-
-# 生成可执行文件(必须要有main)
-# add_executable(rpc_client_demo ${SOURSE})
-
-# 指定生成库文件的路径
-# set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/build/bin)
-
-# 生成静态库文件
-# add_library(myrpc STATIC ${SRC_SOURSE})
-
-# 连接动态库
-# target_link_libraries(myrpc pthread protobuf zookeeper_mt)
+# 设置可执行文件的链接目标：依赖 myrpc 库，以及没有公开的公共库
+target_link_libraries(rpc_client_demo PRIVATE myrpc pthread protobuf zookeeper_mt)

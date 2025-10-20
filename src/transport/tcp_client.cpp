@@ -362,66 +362,17 @@ namespace rpc {
         data.clear();
         data.resize(length);
 
-        // std::lock_guard<std::mutex> lock(buffer_mutex_);
-
-        // 先从buffer_里读数据 - 改为同步模式，弃用buffer
-        // if (!buffer_.empty()) {
-        //     size_t bytes_from_buffer = std::min(length, buffer_.size());
-        //     data.insert(data.end(), buffer_.begin(), buffer_.begin() + bytes_from_buffer);
-        //     buffer_.erase(buffer_.begin(), buffer_.begin() + bytes_from_buffer);
-        // }
-
-        // 还需要数据，就从socket读
-        // while (data.size() < length) {
-        //     size_t remaining = length - data.size();
-        //     std::vector<uint8_t> temp_buffer(remaining);
-
-        //     // 阻塞
-        //     ssize_t n = recv(sockfd_, temp_buffer.data(), remaining, 0);
-
-        //     if (n > 0) {
-        //         temp_buffer.resize(n);
-        //         data.insert(data.end(), temp_buffer.begin(), temp_buffer.end());
-        //     } else if (n == 0) {
-        //         std::cerr << "Connection closed by peer while reading" << std::endl;
-        //         return false;
-        //     } else {
-        //         if (errno == EINTR) {
-        //             // 被信号中断，继续接收
-        //             continue;
-        //         } else if (errno == EAGAIN || errno == EWOULDBLOCK) {
-        //             // 非阻塞socket超时，继续等待
-        //             std::this_thread::sleep_for(std::chrono::milliseconds(10));
-        //             continue;
-        //         } else {
-        //             std::cerr << "recv error: " << strerror(errno) << std::endl;
-        //             return false;
-        //         }
-        //     }
-        // }
-
-
-        std::cout << "[DEBUG readExactly] Need to read " << length << " bytes" << std::endl;
-
         size_t total_read = 0;
         int retry_count = 0;
         const int MAX_RETRIES = 5000;  // 5秒超时（5000 * 1ms）
 
         while (total_read < length) {
             size_t remaining = length - total_read;
-            std::cout << "[DEBUG readExactly] Before recv: total_read=" << total_read 
-                      << ", remaining=" << remaining << std::endl;
 
             ssize_t n = recv(sockfd_, data.data() + total_read, remaining, 0);
 
-            std::cout << "[DEBUG readExactly] recv returned " << n 
-                      << ", total_read=" << total_read 
-                      << ", remaining=" << remaining << std::endl;
-
             if (n > 0) {
-                std::cout << "[DEBUG readExactly] Adding " << n << " to total_read" << std::endl;
                 total_read += n;
-                std::cout << "[DEBUG readExactly] Now total_read=" << total_read << std::endl;
                 retry_count = 0;  // 重置重试计数
             } else if (n == 0) {
                 std::cerr << "[DEBUG readExactly] Connection closed by peer while reading" << std::endl;
@@ -451,7 +402,6 @@ namespace rpc {
                 }
             }
         }
-        std::cout << "[DEBUG readExactly] Successfully read " << total_read << " bytes" << std::endl;
         return true;
     }
 }

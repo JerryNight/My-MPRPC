@@ -230,18 +230,13 @@ void RpcServer::handleMessage(std::shared_ptr<TcpConnection> connection, const s
 
 // 处理rpc请求
 void RpcServer::handleRpcRequest(std::shared_ptr<TcpConnection> connection, const std::vector<uint8_t>& request_data) {
-    std::cout << "[DEBUG SERVER] handleRpcRequest: received " << request_data.size() << " bytes" << std::endl;
 
     try {
         // 解析RPC请求
         RpcRequest request = parseRpcRequest(request_data);
-        std::cout << "[DEBUG SERVER] Parsed request: service=" << request.service_name 
-                  << ", method=" << request.method_name 
-                  << ", request_id=" << request.request_id << std::endl;
     
         // 调用服务方法
         std::vector<uint8_t> response_data = callServiceMethod(request.service_name, request.method_name, request.request_data);
-        std::cout << "[DEBUG SERVER] Service method returned " << response_data.size() << " bytes" << std::endl;
     
         // 创建RPC响应
         RpcResponse response;
@@ -285,22 +280,16 @@ void RpcServer::sendResponse(std::shared_ptr<TcpConnection> connection, const Rp
         std::cerr << "[DEBUG SERVER] sendResponse: connection is null!" << std::endl;
         return;
     }
-    std::cout << "[DEBUG SERVER] Preparing to send response, request_id: " << response.request_id 
-              << ", success: " << response.success << std::endl;
 
     // 序列化响应
     auto response_proto_data = serializeRpcResponse(response);
-    std::cout << "[DEBUG SERVER] Serialized response data size: " << response_proto_data.size() << " bytes" << std::endl;
 
     // 编码+帧前缀
     auto response_proto_encode = frame_codec_->encode(response_proto_data);
-    std::cout << "[DEBUG SERVER] Encoded response size (with frame): " << response_proto_encode.size() << " bytes" << std::endl;
 
     // 发送
     if (!connection->send(response_proto_encode)) {
         std::cerr << "Failed to send response to " << connection->getRemoteAddress() << std::endl;
-    } else {
-        std::cout << "[DEBUG SERVER] Encoded response size (with frame): " << response_proto_encode.size() << " bytes" << std::endl;
     }
 }
 

@@ -220,7 +220,7 @@ namespace rpc {
         std::cout << "New connection from " << peer_addr << std::endl;
     }
 
-    // 处理客户端事件
+    // 处理客户端事件（写事件-发送响应，在TcpConnection里处理-send）
     void TcpServerImpl::handleClientEvent(const struct epoll_event& event) {
         auto* connection = static_cast<TcpConnectionImpl*>(event.data.ptr);
         if (!connection) {
@@ -229,10 +229,6 @@ namespace rpc {
 
         if (event.events & EPOLLIN) {
             handleClientRead(connection);
-        }
-
-        if (event.events & EPOLLOUT) {
-            
         }
 
         if (event.events & (EPOLLERR | EPOLLHUP)) {
