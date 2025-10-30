@@ -111,6 +111,16 @@ namespace rpc {
         return sockfd_;
     }
 
+    // 获取输入缓冲区
+    Buffer* TcpConnectionImpl::getInputBuffer() {
+        return &input_buffer_;
+    }
+
+    // 获取输出缓冲区
+    Buffer* TcpConnectionImpl::getOutputBuffer() {
+        return &output_buffer_;
+    }
+
     // 处理错误
     void TcpConnectionImpl::handleError(const std::string& error_msg) {
         state_ = ConnectionState::DISCONNECTED;
@@ -120,42 +130,37 @@ namespace rpc {
         }
     }
 
-    // 把数据追加到 read_buffer_
-    void TcpConnectionImpl::appendToReadBuffer(const std::vector<uint8_t>& data) {
-        std::lock_guard<std::mutex> lock(read_buffer_mutex_);
-        read_buffer_.insert(read_buffer_.end(), data.begin(), data.end());
-    }
-
-    // 解码一个完整的帧
+    // 解码一个完整的帧（使用新的Buffer）
     bool TcpConnectionImpl::decodeFrame(std::vector<uint8_t>& frame_data) {
-        std::lock_guard<std::mutex> lock(read_buffer_mutex_);
-        if (read_buffer_.size() < 4) {
+        std::lock_guard<std::mutex> lock(buffer_mutex_);
+        
+        // 检查是否有足够的数据读取长度字段
+        if (input_buffer_.readableBytes() < 4) {
             return false;
         }
-        // 读数据头 网络序->主机序
-        uint32_t length_net;
-        std::memcpy(&length_net, read_buffer_.data(), 4);
-        uint32_t length_host = ntohl(length_net);
+        
+        // 读取长度字段（不移除）
+        uint32_t length_host = input_buffer_.peekInt<uint32_t>();
+        
         // 验证长度
         const uint32_t MAX_FRAME_SIZE = 10 * 1024 * 1024;
         if (length_host == 0 || length_host > MAX_FRAME_SIZE) {
             std::cerr << "Invalid frame length: " << length_host << std::endl;
-            read_buffer_.clear();  // 清空缓冲区，防止一直出错
+            input_buffer_.retrieveAll();  // 清空缓冲区，防止一直出错
             return false;
         }
-        // 检查是否有完整帧
-        if (read_buffer_.size() < length_host + 4) {
-            // 半包
+        
+        // 检查是否有完整帧（4字节长度 + 消息体）
+        if (input_buffer_.readableBytes() < length_host + 4) {
+            // 半包，等待更多数据
             return false;
         }
 
-        // 提取完整帧
-        frame_data.clear();
-        frame_data.insert(frame_data.end(), 
-                          read_buffer_.data() + 4, 
-                          read_buffer_.data() + 4 + length_host);
-        // 缓冲区删除已处理的数据
-        read_buffer_.erase(read_buffer_.begin(), read_buffer_.begin() + 4 + length_host);
+        // 移除长度字段
+        input_buffer_.retrieve(4);
+        
+        // 提取完整帧数据
+        frame_data = input_buffer_.retrieveAsVector(length_host);
         
         return true;
     }

@@ -238,15 +238,14 @@ namespace rpc {
 
     // 处理读事件
     void TcpServerImpl::handleClientRead(TcpConnectionImpl* connection) {
-        std::vector<uint8_t> buffer(4096);
-        ssize_t n = recv(connection->getSocketFd(), buffer.data(), buffer.size(), 0);
+        int saved_errno = 0;
+        Buffer* input_buffer = connection->getInputBuffer();
+        
+        // 使用Buffer的readFromFd高效读取数据
+        ssize_t n = input_buffer->readFromFd(connection->getSocketFd(), &saved_errno);
 
         if (n > 0) {
-            // TODO 接收到数据，调用消息处理回调
-            buffer.resize(n);
-            // 把数据追加到connection里的读缓冲区
-            connection->appendToReadBuffer(buffer);
-            // 尝试解码完整的帧
+            // 接收到数据，尝试解码完整的帧
             std::vector<uint8_t> frame_data;
             // 使用while循环，解决粘包问题（一次接收到多个请求）
             while (connection->decodeFrame(frame_data)) {
@@ -256,10 +255,12 @@ namespace rpc {
                 }
             }
         } else if (n == 0) {
+            // 对端关闭连接
             handleClientClose(connection);
         } else {
-            if (errno != EAGAIN && errno != EWOULDBLOCK) {  // 如果不是资源暂时不可用
-                std::cerr << "Failed to receive data: " << strerror(errno) << std::endl;
+            // 读取错误
+            if (saved_errno != EAGAIN && saved_errno != EWOULDBLOCK) {
+                std::cerr << "Failed to receive data: " << strerror(saved_errno) << std::endl;
                 handleClientClose(connection);
             }
         }
