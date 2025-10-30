@@ -1,6 +1,7 @@
 #pragma once
 
 #include "transport.h"
+#include "buffer.h"
 #include <memory>
 #include <functional>
 #include <string>
@@ -69,8 +70,10 @@ public:
 
     // 获取 socket
     int getSocketFd() const;
-    // 把数据追加到 read_buffer_
-    void appendToReadBuffer(const std::vector<uint8_t>& data);
+    // 获取输入缓冲区
+    Buffer* getInputBuffer();
+    // 获取输出缓冲区
+    Buffer* getOutputBuffer();
     // 解码一个完整的帧
     bool decodeFrame(std::vector<uint8_t>& frame_data);
 
@@ -78,8 +81,9 @@ private:
     int sockfd_; // 客户端fd
     std::string peer_addr_; // 对端地址
     ConnectionState state_; // 连接状态
-    std::vector<uint8_t> read_buffer_; // 读缓冲区
-    std::mutex read_buffer_mutex_; // 缓冲区锁
+    Buffer input_buffer_; // 输入缓冲区（使用新的Buffer类）
+    Buffer output_buffer_; // 输出缓冲区
+    std::mutex buffer_mutex_; // 缓冲区锁
     MessageCallback message_callback_;
     ConnectionCallback connection_callback_;
     WriteCompleteCallback write_complete_callback_;
